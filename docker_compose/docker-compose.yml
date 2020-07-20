@@ -4,5 +4,6 @@ services:
 
   python:
     build:
-      context: service_a
+      context: service_a/
       dockerfile: Dockerfile
+    image: python-stuff
