@@ -1,7 +1,6 @@
-FROM ubuntu as builder
-
-WORKDIR /home
-
-RUN touch bla.txt
+FROM debian as builder
 
 FROM ubuntu
+
+COPY --from=builder /etc/os-release /home
+
