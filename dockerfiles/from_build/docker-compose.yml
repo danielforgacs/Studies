@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  hey-service:
+    build: .
+    image: hey-image
+    container_name: hey-container
