@@ -1,21 +1,14 @@
 import os
 import zipfile
 
-
-rootdir = os.path.dirname(__file__)
-archivename = os.path.join(rootdir, 'stuff.zip')
-
-files = [
+filenames = [
     'a.txt',
     'b.txt',
 ]
 
-print(rootdir)
-print(archivename)
-
+rootdir = os.path.dirname(__file__)
+archivename = os.path.join(rootdir, 'stuff.zip')
 
 with zipfile.ZipFile(archivename, 'w') as zipf:
-    for fname in files:
-        # fpath = os.path.join(rootdir, fname)
-        # zipf.write(fpath)
-        zipf.write(fname)
+    for fname in filenames:
+        zipf.write('download/{}'.format(fname))
