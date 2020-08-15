@@ -16,5 +16,6 @@ print(archivename)
 
 with zipfile.ZipFile(archivename, 'w') as zipf:
     for fname in files:
-        fpath = os.path.join(rootdir, fname)
-        zipf.write(fpath)
+        # fpath = os.path.join(rootdir, fname)
+        # zipf.write(fpath)
+        zipf.write(fname)
