@@ -1,22 +1,19 @@
-<!-- <html>
-    <head>
-        <script>
-        </script>
-    </head>
-</html> -->
-
-
 <p>Player 1: </p>
+<p>Player 2: </p>
+<p>Player 3: </p>
+<p>Player 4: </p>
+<p>Player 5: </p>
 
 
 <script>
-    const para = document.querySelector('p');
+    parags = document.getElementsByTagName('p')
 
-    para.addEventListener('click', updateName);
+    for (par in parags) {
+        par = document.addEventListener('click', updateName);
+    }
 
-    function updateName() {
-        console.log('skdfhj')
+    function updateName(args) {
         let name = prompt('Enter a new name');
-        para.textContent = 'Player 1: ' + name;
+        args.target.textContent = 'Player 1: ' + name;
     }
 </script>
