@@ -10,6 +10,12 @@ def fakit():
 
 
 
+class CoolClass:
+    def __init__(self, pk=None):
+        self.pk = pk
+
+
+
 # Restrict to a particular path.
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
@@ -18,6 +24,8 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 with SimpleXMLRPCServer(
         ('localhost', 8000),
         requestHandler=RequestHandler,
+        allow_none = True,
+        use_builtin_types=True,
     ) as server:
     server.register_introspection_functions()
 
@@ -25,6 +33,7 @@ with SimpleXMLRPCServer(
     # pow.__name__ as the name, which is just 'pow'.
     server.register_function(pow)
     server.register_function(fakit)
+    server.register_function(CoolClass)
 
     # Register a function under a different name
     def adder_function(x, y):
