@@ -1,0 +1,19 @@
+<p>Player 1: </p>
+<p>Player 2: </p>
+<p>Player 3: </p>
+<p>Player 4: </p>
+<p>Player 5: </p>
+
+
+<script>
+    parags = document.getElementsByTagName('p')
+
+    for (par in parags) {
+        par = document.addEventListener('click', updateName);
+    }
+
+    function updateName(args) {
+        let name = prompt('Enter a new name');
+        args.target.textContent = 'Player 1: ' + name;
+    }
+</script>
