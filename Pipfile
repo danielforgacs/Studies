@@ -4,6 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django = "==3.1.7"
+djangorestframework = "==3.12.2"
 
 [dev-packages]
 pytest = "*"
@@ -11,4 +13,3 @@ pylint = "*"
 
 [requires]
 python_version = "3.8"
-
