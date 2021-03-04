@@ -1,4 +1,5 @@
 import os
+import io
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'tutorial.settings'
 
@@ -23,6 +24,14 @@ serializer1 = ser.SnippetSerializer(instance=snippet1)
 print(serializer1.data)
 print(serializer1.data['code'])
 
-content = renderers.JSONRenderer().render(serializer1.data)
+bin_data = renderers.JSONRenderer().render(serializer1.data)
 
-print(content)
+print(bin_data)
+
+stream = io.BytesIO(bin_data)
+
+print(stream)
+
+decoded_data = parsers.JSONParser().parse(stream)
+
+print(decoded_data)
