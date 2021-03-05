@@ -1,7 +1,16 @@
+from django.db.models import fields
 from rest_framework import serializers
+from snippets import models
 from snippets.models import Snippet
 from snippets.models import LANGUAGE_CHOICES
 from snippets.models import STYLE_CHOICES
+
+
+
+class SnippetModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Snippet
+        fields = ['id', 'title', 'code', 'linenos', 'language', 'style']
 
 
 class SnippetSerializer(serializers.Serializer):
