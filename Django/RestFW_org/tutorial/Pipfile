@@ -4,10 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==3.1.7"
+Django = "==3.1.7"
 djangorestframework = "==3.12.2"
-pygments = "==2.8.0"
-httpie = "==2.4.0"
+Pygments = "==2.8.0"
 
 [dev-packages]
 
