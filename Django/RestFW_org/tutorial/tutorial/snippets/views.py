@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-import snippets
+# import snippets
 import django.http as http
 import django.views.decorators as decorators
 import rest_framework.parsers as parsers
@@ -26,3 +26,32 @@ def snippet_list(request):
             return http.JsonResponse(serializer.data, status=201)
 
         return http.JsonResponse(serializer.errors, status=400)
+
+
+
+@decorators.csrf_exempt
+def snippet_detail(request, pk):
+    try:
+        snippet = models.Snippet.objects.get(pk=pk)
+    except models.Snippet.DoesNotExist as error:
+        return http.HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = serializers.SnippetModelSerializer(request)
+
+        return http.JsonResponse(serializer)
+
+    elif request.method == 'PUT':
+        data = parsers.JSONParser().parse(request)
+        serializer = serializers.SnippetSerializer(data=data)
+
+        if serializer.is_valid:
+            serializer.save()
+
+            return http.JsonResponse(serializer.data)
+        return http.JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        snippet.delete()
+
+        return http.HttpResponse(status=204)
