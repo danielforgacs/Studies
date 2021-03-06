@@ -14,8 +14,10 @@ import snippets.serializers as serializers
 def snippet_list(request):
     if request.method == 'GET':
         snippets = models.Snippet.objects.all()
-        serializer = serializers.SnippetModelSerializer(data=snippets, many=True)
+        serializer = serializers.SnippetModelSerializer(snippets, many=True)
         response = http.JsonResponse(serializer.data, safe=False)
+
+        return response
 
     elif request.method == 'POST':
         data = parsers.JSONParser(request)
