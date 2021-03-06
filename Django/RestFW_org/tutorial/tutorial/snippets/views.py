@@ -40,9 +40,9 @@ def snippet_detail(request, pk):
         return http.HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = serializers.SnippetModelSerializer(request)
+        serializer = serializers.SnippetModelSerializer(snippet)
 
-        return http.JsonResponse(serializer)
+        return http.JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = parsers.JSONParser().parse(request)
