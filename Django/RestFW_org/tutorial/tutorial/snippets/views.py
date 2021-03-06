@@ -1,7 +1,8 @@
 # from django.shortcuts import render
 # import snippets
 import django.http as http
-import django.views.decorators as decorators
+# import django.views.decorators as decorators
+import django.views.decorators.csrf as csrf
 import rest_framework.parsers as parsers
 import snippets.models as models
 import snippets.serializers as serializers
@@ -9,7 +10,7 @@ import snippets.serializers as serializers
 
 
 
-@decorators.csrf_exempt
+@csrf.csrf_exempt
 def snippet_list(request):
     if request.method == 'GET':
         snippets = models.Snippet.objects.all()
@@ -29,7 +30,7 @@ def snippet_list(request):
 
 
 
-@decorators.csrf_exempt
+@csrf.csrf_exempt
 def snippet_detail(request, pk):
     try:
         snippet = models.Snippet.objects.get(pk=pk)
