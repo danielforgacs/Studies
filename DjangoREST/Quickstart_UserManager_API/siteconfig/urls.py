@@ -24,7 +24,7 @@ api_routers.register('users', views.UserViewSet)
 api_routers.register('groups', views.GroupViewSet)
 
 urlpatterns = [
-    urls.path('', urls.include(api_routers.urls)),
+    urls.path('api/', urls.include(api_routers.urls)),
     # urls.path('api-auth/', urls.include('rest_framework.urls', namespace='rest_framework')),
     # urls.path('admin/', admin.site.urls),
 ]
