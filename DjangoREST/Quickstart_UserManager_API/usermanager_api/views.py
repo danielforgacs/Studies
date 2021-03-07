@@ -17,6 +17,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    queryset = authmodels.User.groups.all()
+    queryset = authmodels.Group.objects.all()
     serializer_class = serialisers.GroudSerialiser
     permission_classes = [permissions.IsAuthenticated]
