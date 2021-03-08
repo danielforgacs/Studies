@@ -8,4 +8,5 @@ api_routs.register('budgets', views.BudgetViewSet)
 
 urlpatterns = [
     urls.path('', urls.include(api_routs.urls)),
+    urls.path('', views.index)
 ]
