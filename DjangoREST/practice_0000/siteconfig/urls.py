@@ -17,6 +17,7 @@ from django.contrib import admin
 import django.urls as urls
 
 urlpatterns = [
+    urls.path('', urls.include('budget.urls')),
     urls.path('api/', urls.include('rest_framework.urls')),
     urls.path('admin/', admin.site.urls),
 ]
