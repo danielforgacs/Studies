@@ -1,3 +1,6 @@
-from django.shortcuts import render
+import budget.serialisers as serials
+import rest_framework.viewsets as drfviewsets
 
-# Create your views here.
+
+class BudgetViewSet(drfviewsets.ModelViewSet):
+    pass
