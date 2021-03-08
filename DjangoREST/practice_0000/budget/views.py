@@ -1,6 +1,7 @@
 import budget.serialisers as serials
 import budget.models as models
 import django.http as djhttp
+import django.shortcuts as djshort
 import rest_framework.viewsets as drfviewsets
 import rest_framework.permissions as drfperms
 
@@ -13,11 +14,6 @@ class BudgetViewSet(drfviewsets.ModelViewSet):
 
 
 def index(request):
-    html = """
-<script>
-    console.log("--> START")
+    response = djshort.render(request=request, template_name='budget/index.html', context={})
 
-    fetch('/budgets/')
-</script>
-    """
-    return djhttp.HttpResponse(html)
+    return response
