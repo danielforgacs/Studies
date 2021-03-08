@@ -8,6 +8,11 @@ api_routs = routers.DefaultRouter()
 api_routs.register('users', views.UserViewSet)
 
 
+print('--> api routes', api_routs)
+print('--> api routes urls\n%s' % '\n'.join(map(str, api_routs.urls)))
+print()
+
+
 
 urlpatterns = [
     # urls.path('api-auth/', urls.include('rest_framework.urls')),
