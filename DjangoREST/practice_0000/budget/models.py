@@ -1,3 +1,5 @@
-from django.db import models
+import django.db.models as models
 
-# Create your models here.
+
+class Budget(models.Model):
+    pass
