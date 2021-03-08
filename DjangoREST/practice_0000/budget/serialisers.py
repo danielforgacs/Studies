@@ -5,4 +5,4 @@ import rest_framework.serializers as drfserials
 class BudgetSerialiser(drfserials.HyperlinkedModelSerializer):
     class Meta:
         model = models.Budget
-        fields = ['entry']
+        fields = ['url', 'entry']
