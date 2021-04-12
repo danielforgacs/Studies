@@ -7,3 +7,7 @@ install-npm:
 
 create-react-app:
 	npx create-react-app my-app
+
+start-react-app:
+	cd my-app && \
+		npm start
