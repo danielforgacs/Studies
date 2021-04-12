@@ -5,5 +5,5 @@ install-nodejs:
 install-npm:
 	sudo apt install npm
 
-# create-react-app:
-# 	npx create-react-app my-app
+create-react-app:
+	npx create-react-app my-app
