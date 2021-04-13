@@ -62,9 +62,21 @@ class Game extends React.Component {
     }
 }
 
-// ========================================
+class Extra extends React.Component {
+    render () {
+        return (
+            <div>
+                <Game />
+                <Game />
+                <Game />
+                Extra...
+            </div>
+        )
+    }
+}
 
 ReactDOM.render(
-    <Game />,
+    // <Game />,
+    <Extra />,
     document.getElementById('root')
 );
