@@ -5,9 +5,13 @@
     <script type="text/javascript">
         const rootElement = document.getElementById('root')
         const element = React.createElement('div', {
-            children: 'Hellow effin word with react...',
             className: 'container',
-        })
+        },
+        'Hellow effin word with react...',
+        'more kids...',
+        'still kids...',
+        )
+        console.log(element)
         ReactDOM.render(element, rootElement)
     </script>
 </body>
