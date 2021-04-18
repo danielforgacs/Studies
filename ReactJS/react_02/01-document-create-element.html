@@ -7,6 +7,7 @@
     <!-- With this line the browser runs the script as "babel" sctipt -->
     <script type="text/babel">
         const rootElement = document.getElementById('root')
+        // --> plain react sysntax:
         // const element = React.createElement('div', {
         //     className: 'container',
         //     children: [
@@ -15,7 +16,14 @@
         //         'still kids...',
         //     ]
         // })
-        const element = <div classname="container">Once again... Hello there fuckers...</div>
+
+        // --> plain babel sysntax:
+        // const element = <div classname="container">Once again... Hello there fuckers...</div>
+
+        // --> babel with templates sysntax:
+        const classname = 'container'
+        const children = 'Once again... Hello there fuckers...'
+        const element = <div classname="{classname}">{children}</div>
         ReactDOM.render(element, rootElement)
     </script>
 </body>
