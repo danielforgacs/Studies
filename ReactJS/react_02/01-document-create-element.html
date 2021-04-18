@@ -4,9 +4,10 @@
     <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
     <script type="text/javascript">
         const rootElement = document.getElementById('root')
-        const element = document.createElement('div')
-        element.textContent = 'Hello effin world...'
-        element.className = 'container'
-        rootElement.appendChild(element)
+        const element = React.createElement('div', {
+            children: 'Hellow effin word with react...',
+            className: 'container',
+        })
+        ReactDOM.render(element, rootElement)
     </script>
 </body>
