@@ -21,9 +21,16 @@
         // const element = <div classname="container">Once again... Hello there fuckers...</div>
 
         // --> babel with templates sysntax:
-        const classname = 'container'
-        const children = 'Once again... Hello there fuckers...'
-        const element = <div classname="{classname}">{children}</div>
+        // const classname = 'container'
+        // const children = 'Once again... Hello there fuckers...'
+        // const element = <div classname="{classname}">{children}</div>
+
+        const CustomClassName = 'container'
+        const element = (
+            <div class="{CustomClassName}">
+                Hello <strong>wwwwwwwkljhfklasfh </strong>
+            </div>
+        )
         ReactDOM.render(element, rootElement)
     </script>
 </body>
