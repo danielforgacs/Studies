@@ -6,11 +6,12 @@
         const rootElement = document.getElementById('root')
         const element = React.createElement('div', {
             className: 'container',
-        },
-        'Hellow effin word with react...',
-        'more kids...',
-        'still kids...',
-        )
+            children: [
+                'Hellow effin word with react...',
+                'more kids...',
+                'still kids...',
+            ]
+        })
         console.log(element)
         ReactDOM.render(element, rootElement)
     </script>
