@@ -5,28 +5,10 @@ import './index.css';
 
 
 class Square extends React.Component {
-    constructor (props) {
-        super(props)
-        this.state = {
-            value: null
-        }
-    }
-
     render () {
         return (
-            <button
-                className="square"
-                onClick={() => {
-                    if (this.state.value == null) {
-                        this.setState({value: "x"})
-                    } else {
-                        this.setState({value: null})
-                    }
-                }}
-            >
-                {/* TODO */}
-                {/* {this.props.value} */}
-                {this.state.value}
+            <button className="square" onClick={() => console.log('LKHJ')}>
+                {this.props.value}
             </button>
         );
     }
@@ -40,19 +22,22 @@ class Board extends React.Component {
         }
     }
 
+    handleClick (i) {
+        console.log("CLICKED")
+
+    }
+
     renderSquare(i) {
-        // return <Square value={i}/>;
-        return <Square value={this.state.squares[i]}/>;
+        return (
+            <Square value={this.state.squares[i]} onClick={ () => this.handleClick(i) } />
+        )
     }
 
     render () {
-        const status = 'Next player: X';
-
         console.log(this.state)
 
         return (
             <div>
-                <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -81,8 +66,6 @@ class Game extends React.Component {
                     <Board />
                 </div>
                 <div className="game-info">
-                    <div>{/* status */}</div>
-                    <ol>{/* TODO */}</ol>
                 </div>
             </div>
         );
