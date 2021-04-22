@@ -5,13 +5,13 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 
+const heading = <div className='app'><h1>Hello react...</h1> </div>
+
+
+
 class App extends React.Component {
   render () {
-    return (
-      <div className='app'>
-        <h1>Hello react...</h1>
-      </div>
-    )
+    return heading
   }
 }
 
