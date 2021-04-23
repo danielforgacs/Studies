@@ -1,0 +1,36 @@
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <!-- <script type="text/javascript"> -->
+    <!-- With this line the browser runs the script as "babel" sctipt -->
+    <script type="text/babel">
+        const rootElement = document.getElementById('root')
+        // --> plain react sysntax:
+        // const element = React.createElement('div', {
+        //     className: 'container',
+        //     children: [
+        //         'Hellow effin word with react...',
+        //         'more kids...',
+        //         'still kids...',
+        //     ]
+        // })
+
+        // --> plain babel sysntax:
+        // const element = <div classname="container">Once again... Hello there fuckers...</div>
+
+        // --> babel with templates sysntax:
+        // const classname = 'container'
+        // const children = 'Once again... Hello there fuckers...'
+        // const element = <div classname="{classname}">{children}</div>
+
+        const CustomClassName = 'container'
+        const element = (
+            <div class="{CustomClassName}">
+                Hello <strong>wwwwwwwkljhfklasfh </strong>
+            </div>
+        )
+        ReactDOM.render(element, rootElement)
+    </script>
+</body>
