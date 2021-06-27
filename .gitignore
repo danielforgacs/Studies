@@ -3,5 +3,5 @@
 db.sqlite3
 
 # directories:
-.venv/
+.venv*/
 .vscode/
