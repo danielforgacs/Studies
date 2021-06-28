@@ -41,7 +41,19 @@ async def main3():
     print(results)
 
 
+async def main4():
+    tasks = []
+    for _ in range(10):
+        tasks += [asyncio.create_task(get_4())]
+    results = []
+
+    for t in tasks:
+        results += [await t]
+
+    print(sum(results))
+
 
 # asyncio.run(main())
 # asyncio.run(main2())
-asyncio.run(main3())
+# asyncio.run(main3())
+asyncio.run(main4())
