@@ -1,26 +1,44 @@
 use actix_web::{HttpServer, App, Responder, web};
+use std::sync::Mutex;
 
 struct AppState {
     app_name: String,
 }
 
-async fn hello_world(data: web::Data<AppState>) -> impl Responder {
-    format!("Hello app: {}!", &data.app_name)
+struct AppStateWithCounter {
+    // Mutex is necessary to mutate safely across threads
+    counter: Mutex<i32>,
 }
 
-async fn app_name(data: web::Data<AppState>) -> impl Responder {
-    format!("App name: {}.", &data.app_name)
+async fn hello_world(data: web::Data<AppState>, counter: web::Data<AppStateWithCounter>) -> impl Responder {
+    // Get counter's MutexGuard
+    let mut counter = counter.counter.lock().unwrap();
+    // Access counter inside MutexGuard
+    *counter += 1;
+    format!("Hello app: {}! visit count: {}", &data.app_name, counter)
+}
+
+async fn app_name(data: web::Data<AppState>, counter: web::Data<AppStateWithCounter>) -> impl Responder {
+    // Get counter's MutexGuard
+    let mut counter = counter.counter.lock().unwrap();
+    // Access counter inside MutexGuard
+    *counter += 1;
+
+    format!("App name: {}. visit count: {}", &data.app_name, counter)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    // Note: web::Data created _outside_ HttpServer::new closure
+    let counter = web::Data::new(AppStateWithCounter {
+        counter: Mutex::new(0),
+    });
+
+    HttpServer::new(move || {
         App::new()
-            .app_data(web::Data::new(
-                AppState {
-                    app_name: String::from("Actix Web"),
-                }
-            ))
+            .app_data(web::Data::new(AppState { app_name: String::from("Actix Web") }))
+            // to be able to use this, the closure mused be moved!
+            .app_data(counter.clone())
             .route("/", web::get().to(hello_world))
             .route("/appname", web::get().to(app_name))
     })
