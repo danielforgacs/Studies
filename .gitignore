@@ -1,2 +1,10 @@
+# serialising_struct_to_bin_file__no_dependency data file
+*.dat
+
 # Rust build target dirs.
 target/
+
+# Book source code
+Rust-Web-Programming/
+# Book source code.
+practical-rust-web-projects/
