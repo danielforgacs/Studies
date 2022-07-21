@@ -1,4 +1,4 @@
-use actix_files::{NamedFile};
+use actix_files::{NamedFile, Files};
 use actix_web::{App, HttpServer, Result};
 use actix_web::web;
 
@@ -10,7 +10,14 @@ async fn index() -> Result<NamedFile> {
 async fn main() -> std::io::Result<()> {
     println!("http://localhost:8090");
     HttpServer::new(|| {
-        App::new().route("/", web::get().to(index))
+        App::new()
+        .service(
+            Files::new("/static", "static")
+            // This lists (servs) files in the static folder
+            // in the /static path for debugging
+            .show_files_listing()
+        )
+        .route("/", web::get().to(index))
     })
     .bind("localhost:8090")?
     .run()
