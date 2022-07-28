@@ -1,5 +1,5 @@
-use actix_files::{NamedFile, Files};
-use actix_web::{App, HttpServer, Result, HttpResponse};
+use actix_files::{Files};
+use actix_web::{App, HttpServer, HttpResponse};
 use actix_web::web;
 use serde_json::json;
 use handlebars::Handlebars;
