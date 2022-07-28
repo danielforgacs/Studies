@@ -5,7 +5,7 @@ services:
     image: postgres:14
     restart: always
     environment:
-      - POSTGRES_DB=cats
-      - POSTGRES_PASSWORD=yes
+      - POSTGRES_PASSWORD=letmein
+      - POSTGRES_DB=cats_database
     ports:
       - 5432:5432
