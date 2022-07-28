@@ -12,5 +12,5 @@ handlebars = { version = "4.3.3", features = ["dir_source"] }
 serde_json = "1.0.82"
 diesel = { version = "1.4.4", features = ["postgres", "r2d2"] }
 dotenv = "0.15.0"
-serde = "1.0.140"
+serde = { version = "1.0.140", features = ["derive"] }
 r2d2 = "0.8.10"
