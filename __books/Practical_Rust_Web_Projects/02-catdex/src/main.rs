@@ -12,6 +12,7 @@ use actix_web::{App, HttpServer, HttpResponse};
 use actix_web::web;
 use serde_json::json;
 use handlebars::Handlebars;
+use dotenv;
 
 async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
     let data = json!({
@@ -38,6 +39,8 @@ async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     println!("http://localhost:8090");
+
+    dotenv::dotenv().ok();
 
     let mut hb = Handlebars::new();
     hb.register_templates_directory(".html", "./static/").unwrap();
