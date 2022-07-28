@@ -1,3 +1,12 @@
+pub mod models;
+pub mod schema;
+
+use self::models::*;
+
+#[macro_use]
+extern crate diesel;
+use diesel::prelude::*;
+
 use actix_files::{Files};
 use actix_web::{App, HttpServer, HttpResponse};
 use actix_web::web;
