@@ -49,6 +49,11 @@ async fn index(
     Ok(HttpResponse::Ok().body(body))
 }
 
+async fn add(handlebars: web::Data<Handlebars<'_>>) -> Result<HttpResponse, Error> {
+    let body = handlebars.render("add", &{}).unwrap();
+    Ok(HttpResponse::Ok().body(body))
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
@@ -83,6 +88,7 @@ async fn main() -> std::io::Result<()> {
             .show_files_listing()
         )
         .route("/", web::get().to(index))
+        .route("/add", web::get().to(add))
     })
     .bind("localhost:8090")?
     .run()
