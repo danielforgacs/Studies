@@ -16,7 +16,7 @@ use serde_json::json;
 use handlebars::Handlebars;
 use dotenv;
 
-async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
+async fn index(handlebars: web::Data<Handlebars<'_>>) -> HttpResponse {
     let data = json!({
         "project_name": "Catdex",
         "cats": [
@@ -34,7 +34,7 @@ async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
             },
         ]
     });
-    let body = hb.render("index", &data).unwrap();
+    let body = handlebars.render("index", &data).unwrap();
     HttpResponse::Ok().body(body)
 }
 
@@ -42,9 +42,9 @@ async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
 
-    let mut hb = Handlebars::new();
-    hb.register_templates_directory(".html", "./static/").unwrap();
-    let hb_ref = web::Data::new(hb);
+    let mut handlebars = Handlebars::new();
+    handlebars.register_templates_directory(".html", "./static/").unwrap();
+    let handlebars_webdata = web::Data::new(handlebars);
 
     // setting up the db connection pool
     let database_url = match std::env::var("DATABASE_URL") {
@@ -63,7 +63,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
-        .app_data(hb_ref.clone())
+        .app_data(handlebars_webdata.clone())
         .data(pool.clone())
         .service(
             Files::new("/static", "static")
