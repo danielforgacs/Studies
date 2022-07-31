@@ -16,6 +16,7 @@ use actix_web::web;
 use serde::Serialize;
 use handlebars::Handlebars;
 use dotenv;
+use awmp;
 
 /*
 // PgConnection comes from diesel::prelude
@@ -49,7 +50,9 @@ async fn index(
     Ok(HttpResponse::Ok().body(body))
 }
 
-async fn add(handlebars: web::Data<Handlebars<'_>>) -> Result<HttpResponse, Error> {
+async fn add(
+    handlebars: web::Data<Handlebars<'_>>,
+) -> Result<HttpResponse, Error> {
     let body = handlebars.render("add", &{}).unwrap();
     Ok(HttpResponse::Ok().body(body))
 }
