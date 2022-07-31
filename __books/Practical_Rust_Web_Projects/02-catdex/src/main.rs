@@ -9,11 +9,11 @@ extern crate diesel;
 use diesel::prelude::*;
 // use diesel::pg::PgConnection;
 use diesel::r2d2;
+use awmp;
 
 use actix_files::{Files};
-use actix_web::{App, HttpServer, HttpResponse, Error, http};
+use actix_web::{App, HttpServer, HttpResponse, Error};
 use actix_web::web;
-use serde_json::json;
 use serde::Serialize;
 use handlebars::Handlebars;
 use dotenv;
@@ -50,6 +50,31 @@ async fn index(
     Ok(HttpResponse::Ok().body(body))
 }
 
+async fn add(
+    handlebars: web::Data<Handlebars<'_>>,
+) -> Result<HttpResponse, Error> {
+    let body = handlebars.render("add", &{}).unwrap();
+    Ok(HttpResponse::Ok().body(body))
+}
+
+async fn add_cat_form(
+    pool: web::Data<r2d2::Pool<r2d2::ConnectionManager<PgConnection>>>,
+    mut parts: awmp::Parts,
+) -> Result<HttpResponse, Error> {
+    let mut file_path = parts
+        .files
+        .take("image")
+        .pop()
+        .and_then(|f| f.persist_in("./static/images").ok())
+        .unwrap_or_default();
+    let text_fields: std::collections::HashMap<_, _> = parts
+        .texts
+        .as_pairs()
+        .into_iter()
+        .collect();
+    Ok(HttpResponse::Ok().finish())
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
@@ -72,6 +97,7 @@ async fn main() -> std::io::Result<()> {
         .expect("Failed to create DB connection pool");
 
     println!("http://localhost:8090");
+    println!("http://localhost:8090/add");
 
     HttpServer::new(move || {
         App::new()
@@ -84,6 +110,8 @@ async fn main() -> std::io::Result<()> {
             .show_files_listing()
         )
         .route("/", web::get().to(index))
+        .route("/add", web::get().to(add))
+        .route("/add_cat_form", web::post().to(add_cat_form))
     })
     .bind("localhost:8090")?
     .run()
