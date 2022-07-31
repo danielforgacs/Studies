@@ -6,6 +6,5 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=letmein
-      - POSTGRES_DB=cats_database
     ports:
       - 5432:5432
