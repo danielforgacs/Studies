@@ -11,9 +11,8 @@ use diesel::prelude::*;
 use diesel::r2d2;
 
 use actix_files::{Files};
-use actix_web::{App, HttpServer, HttpResponse, Error, http};
+use actix_web::{App, HttpServer, HttpResponse, Error};
 use actix_web::web;
-use serde_json::json;
 use serde::Serialize;
 use handlebars::Handlebars;
 use dotenv;

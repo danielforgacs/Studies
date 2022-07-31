@@ -1,5 +1,4 @@
 use serde::{Serialize};
-use super::schema::cats;
 
 #[derive(Queryable, Serialize)]
 pub struct Cat {
