@@ -14,3 +14,4 @@ diesel = { version = "1.4.4", features = ["postgres", "r2d2"] }
 dotenv = "0.15.0"
 serde = { version = "1.0.140", features = ["derive"] }
 r2d2 = "0.8.10"
+awmp = "0.8.1"
