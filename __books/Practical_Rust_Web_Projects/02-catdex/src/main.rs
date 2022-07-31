@@ -2,40 +2,52 @@ pub mod models;
 pub mod schema;
 
 use self::models::*;
+use self::schema::cats::dsl::*;
 
 #[macro_use]
 extern crate diesel;
 use diesel::prelude::*;
-use diesel::pg::PgConnection;
+// use diesel::pg::PgConnection;
 use diesel::r2d2;
 
 use actix_files::{Files};
-use actix_web::{App, HttpServer, HttpResponse};
+use actix_web::{App, HttpServer, HttpResponse, Error, http};
 use actix_web::web;
 use serde_json::json;
+use serde::Serialize;
 use handlebars::Handlebars;
 use dotenv;
 
-async fn index(handlebars: web::Data<Handlebars<'_>>) -> HttpResponse {
-    let data = json!({
-        "project_name": "Catdex",
-        "cats": [
-            {
-                "name": "British short hair",
-                "image_path": "/static/image/british-short-hair.jpg",
-            },
-            {
-                "name": "Persian",
-                "image_path": "/static/image/persian.jpg",
-            },
-            {
-                "name": "ragdoll",
-                "image_path": "/static/image/ragdoll.jpg",
-            },
-        ]
-    });
+/*
+// PgConnection comes from diesel::prelude
+THE BOOK CREATES A TYPE ALIAS:
+type DbPool = r2d2::Pool<r2d2::ConnectionManager<PgConnection>>;
+*/
+
+#[derive(Serialize)]
+struct IndexTemplateData {
+    project_name: String,
+    cats: Vec<self::models::Cat>
+}
+
+
+async fn index(
+    handlebars: web::Data<Handlebars<'_>>,
+    pool: web::Data<r2d2::Pool<r2d2::ConnectionManager<PgConnection>>>)
+    -> Result<HttpResponse, Error>
+{
+    let connection = pool.get().expect("Can't get connection from pool.");
+    let cats_data = web::block(move || cats.limit(100).load::<Cat>(&connection))
+        .await
+        .unwrap()
+        .unwrap();
+
+    let data = IndexTemplateData {
+        project_name: "Catdex".to_string(),
+        cats: cats_data,
+    };
     let body = handlebars.render("index", &data).unwrap();
-    HttpResponse::Ok().body(body)
+    Ok(HttpResponse::Ok().body(body))
 }
 
 #[actix_web::main]
