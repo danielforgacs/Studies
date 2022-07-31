@@ -6,6 +6,8 @@ use self::models::*;
 #[macro_use]
 extern crate diesel;
 use diesel::prelude::*;
+use diesel::pg::PgConnection;
+use diesel::r2d2;
 
 use actix_files::{Files};
 use actix_web::{App, HttpServer, HttpResponse};
@@ -38,17 +40,31 @@ async fn index(hb: web::Data<Handlebars<'_>>) -> HttpResponse {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    println!("http://localhost:8090");
-
     dotenv::dotenv().ok();
 
     let mut hb = Handlebars::new();
     hb.register_templates_directory(".html", "./static/").unwrap();
     let hb_ref = web::Data::new(hb);
 
+    // setting up the db connection pool
+    let database_url = match std::env::var("DATABASE_URL") {
+        Ok(url) => url,
+        Err(_) => {
+            println!("Set the DATABASE_URL env var.");
+            return Ok(());
+        }
+    };
+    let manager = r2d2::ConnectionManager::<PgConnection>::new(database_url);
+    let pool = r2d2::Pool::builder()
+        .build(manager)
+        .expect("Failed to create DB connection pool");
+
+    println!("http://localhost:8090");
+
     HttpServer::new(move || {
         App::new()
         .app_data(hb_ref.clone())
+        .data(pool.clone())
         .service(
             Files::new("/static", "static")
             // This lists (servs) files in the static folder
