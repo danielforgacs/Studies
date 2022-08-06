@@ -1,5 +1,6 @@
 use actix_web::{App, HttpServer};
 use actix_files::{Files};
+use diesel;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
