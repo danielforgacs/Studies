@@ -66,7 +66,7 @@ async fn main() -> std::io::Result<()> {
                 .route("/alive", web::get().to(alive))
         }
     )
-        .bind("localhost:8090")?
+        .bind("127.0.0.1:8090")?
         .run()
         .await
 }
