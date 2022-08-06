@@ -4,7 +4,7 @@ use crate::schema::cats::dsl::*;
 
 use actix_web::{App, HttpServer, HttpResponse, Responder};
 use actix_web::web;
-use actix_files::{Files};
+use actix_files::{Files, NamedFile};
 use serde::{Serialize};
 
 #[macro_use]
@@ -38,8 +38,9 @@ async fn api_cats() -> HttpResponse {
     HttpResponse::Ok().json(query)
 }
 
-async fn index() -> HttpResponse {
-    HttpResponse::Ok().finish()
+async fn index() -> Result<NamedFile, std::io::Error> {
+    // HttpResponse::Ok().finish()
+    Ok(NamedFile::open("./static/index.html")?)
 }
 
 pub fn establish_connection() -> PgConnection {
@@ -64,6 +65,7 @@ async fn main() -> std::io::Result<()> {
                         .route("/cats", web::get().to(api_cats))
                 )
                 .route("/alive", web::get().to(alive))
+                .route("/", web::get().to(index))
         }
     )
         .bind("127.0.0.1:8090")?
