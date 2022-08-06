@@ -52,9 +52,9 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(
         move || {
             App::new()
-                // .service(
-                //     Files::new("/", "static")
-                // )
+                .service(
+                    Files::new("/static", ".")
+                )
                 .service(
                     web::scope("/api")
                         .route("/cats", web::get().to(api_cats))
