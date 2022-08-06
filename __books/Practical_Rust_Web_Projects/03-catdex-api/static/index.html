@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>cats</h1>
+    <div id="cats">
+    </div>
+</body>
+<script>
+    console.log('--> Cats api started.')
+    let cats_div = document.getElementById('cats')
+    console.log('--> cats div: ', cats_div)
+
+    function body_build(cats) {
+        console.log('--> cats:', cats)
+
+        for (cat of cats) {
+            console.log(cat.name, cat.image_path)
+            let cat_elem = document.createElement('div')
+            let template = `
+            <article>${cat.name}</article>
+            <p>
+                <img src="/static/images/${cat.image_path}" alt="" />
+            </p>
+            `
+            cat_elem.innerHTML = template
+            cats_div.appendChild(cat_elem)
+        }
+    }
+
+    fetch('api/cats')
+    .then(response => response.json())
+    .then(cats => body_build(cats))
+</script>
+</html>
