@@ -38,6 +38,10 @@ async fn api_cats() -> HttpResponse {
     HttpResponse::Ok().json(query)
 }
 
+async fn index() -> HttpResponse {
+    HttpResponse::Ok().finish()
+}
+
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();
 
