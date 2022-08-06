@@ -33,7 +33,7 @@ async fn api_cats() -> HttpResponse {
 }
 
 async fn index() -> Result<NamedFile, std::io::Error> {
-    Ok(NamedFile::open("./static/index.html")?)
+    Ok(NamedFile::open_async("./static/index.html").await?)
 }
 
 pub fn establish_connection() -> PgConnection {
