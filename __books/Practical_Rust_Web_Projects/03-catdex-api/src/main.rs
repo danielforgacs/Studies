@@ -29,6 +29,7 @@ async fn alive() -> impl Responder {
 }
 
 async fn api_cats() -> HttpResponse {
+    println!("api_cats()");
     let mut conn = establish_connection();
     let query = cats
         .load::<Cats>(&mut conn)
@@ -54,10 +55,10 @@ async fn main() -> std::io::Result<()> {
                 // .service(
                 //     Files::new("/", "static")
                 // )
-                // .service(
-                //     web::scope("/api")
-                //         .route("/cats", web::get().to(api_cats))
-                // )
+                .service(
+                    web::scope("/api")
+                        .route("/cats", web::get().to(api_cats))
+                )
                 .route("/alive", web::get().to(alive))
         }
     )
