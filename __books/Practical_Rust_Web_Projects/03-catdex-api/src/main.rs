@@ -34,7 +34,7 @@ async fn api_cats() -> HttpResponse {
     let query = cats
         .load::<Cats>(&mut conn)
         .expect("Can't query cats.");
-    dbg!(&query);
+    // dbg!(&query);
     HttpResponse::Ok().json(query)
 }
 
@@ -58,7 +58,7 @@ async fn main() -> std::io::Result<()> {
         move || {
             App::new()
                 .service(
-                    Files::new("/static", ".")
+                    Files::new("/static", "static")
                 )
                 .service(
                     web::scope("/api")
