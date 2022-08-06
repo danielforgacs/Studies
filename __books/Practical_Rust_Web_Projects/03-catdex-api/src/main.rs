@@ -1,3 +1,7 @@
+mod schema;
+
+use crate::schema::cats::dsl::*;
+
 use actix_web::{App, HttpServer};
 use actix_files::{Files};
 
@@ -10,8 +14,8 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
-#[derive(Queryable)]
-struct Cats {
+#[derive(Queryable, Debug)]
+struct Cat {
     pub id: i32,
     pub name: String,
     pub image_path: String,
@@ -28,7 +32,11 @@ pub fn establish_connection() -> PgConnection {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let conn = establish_connection();
+    let mut conn = establish_connection();
+    let query = cats
+        .load::<Cat>(&mut conn)
+        .expect("Can't query cats.");
+    dbg!(&query);
 
     HttpServer::new(
         move || {
