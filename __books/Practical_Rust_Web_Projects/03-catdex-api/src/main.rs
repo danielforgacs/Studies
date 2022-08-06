@@ -36,7 +36,6 @@ async fn main() -> std::io::Result<()> {
     let query = cats
         .load::<Cat>(&mut conn)
         .expect("Can't query cats.");
-    dbg!(&query);
 
     HttpServer::new(
         move || {
