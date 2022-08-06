@@ -2,7 +2,8 @@ mod schema;
 
 use crate::schema::cats::dsl::*;
 
-use actix_web::{App, HttpServer, HttpResponse};
+use actix_web::{App, HttpServer, HttpResponse, Responder};
+use actix_web::web;
 use actix_files::{Files};
 use serde::{Serialize};
 
@@ -15,20 +16,24 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
-#[derive(Queryable, Serialize)]
+#[derive(Queryable, Serialize, Debug)]
 struct Cats {
     pub id: i32,
     pub name: String,
     pub image_path: String,
 }
 
-fn api_cats() -> HttpResponse {
+async fn alive() -> impl Responder {
+    println!("alive");
+    "alive"
+}
+
+async fn api_cats() -> HttpResponse {
     let mut conn = establish_connection();
     let query = cats
         .load::<Cats>(&mut conn)
         .expect("Can't query cats.");
-
-    // HttpResponse::Ok().body("cats")
+    dbg!(&query);
     HttpResponse::Ok().json(query)
 }
 
@@ -46,12 +51,17 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(
         move || {
             App::new()
-                .service(
-                    Files::new("/", "static")
-                )
+                // .service(
+                //     Files::new("/", "static")
+                // )
+                // .service(
+                //     web::scope("/api")
+                //         .route("/cats", web::get().to(api_cats))
+                // )
+                .route("/alive", web::get().to(alive))
         }
     )
-        .bind("127.0.0.1:8090")?
+        .bind("localhost:8090")?
         .run()
         .await
 }
