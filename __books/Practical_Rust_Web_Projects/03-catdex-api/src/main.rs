@@ -4,6 +4,7 @@ use crate::schema::cats::dsl::*;
 
 use actix_web::{App, HttpServer, HttpResponse};
 use actix_files::{Files};
+use serde::{Serialize};
 
 #[macro_use]
 extern crate diesel;
@@ -14,20 +15,21 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
-#[derive(Queryable, Debug)]
-struct Cat {
+#[derive(Queryable, Serialize)]
+struct Cats {
     pub id: i32,
     pub name: String,
     pub image_path: String,
 }
 
-fn cats() -> HttpResponse {
-    // let mut conn = establish_connection();
-    // let query = cats
-    //     .load::<Cat>(&mut conn)
-    //     .expect("Can't query cats.");
+fn api_cats() -> HttpResponse {
+    let mut conn = establish_connection();
+    let query = cats
+        .load::<Cats>(&mut conn)
+        .expect("Can't query cats.");
 
-    HttpResponse::Ok().body("cats")
+    // HttpResponse::Ok().body("cats")
+    HttpResponse::Ok().json(query)
 }
 
 pub fn establish_connection() -> PgConnection {
