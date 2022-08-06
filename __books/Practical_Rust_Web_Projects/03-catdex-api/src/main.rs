@@ -10,6 +10,13 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
+#[derive(Queryable)]
+struct Cats {
+    pub id: i32,
+    pub name: String,
+    pub image_path: String,
+}
+
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();
 
@@ -21,6 +28,8 @@ pub fn establish_connection() -> PgConnection {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let conn = establish_connection();
+
     HttpServer::new(
         move || {
             App::new()
