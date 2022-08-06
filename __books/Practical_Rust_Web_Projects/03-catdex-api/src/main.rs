@@ -2,7 +2,7 @@ mod schema;
 
 use crate::schema::cats::dsl::*;
 
-use actix_web::{App, HttpServer};
+use actix_web::{App, HttpServer, HttpResponse};
 use actix_files::{Files};
 
 #[macro_use]
@@ -21,6 +21,15 @@ struct Cat {
     pub image_path: String,
 }
 
+fn cats() -> HttpResponse {
+    // let mut conn = establish_connection();
+    // let query = cats
+    //     .load::<Cat>(&mut conn)
+    //     .expect("Can't query cats.");
+
+    HttpResponse::Ok().body("cats")
+}
+
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();
 
@@ -32,11 +41,6 @@ pub fn establish_connection() -> PgConnection {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let mut conn = establish_connection();
-    let query = cats
-        .load::<Cat>(&mut conn)
-        .expect("Can't query cats.");
-
     HttpServer::new(
         move || {
             App::new()
