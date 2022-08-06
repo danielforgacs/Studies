@@ -1,17 +1,14 @@
 mod schema;
 
-use crate::schema::cats::dsl::*;
+#[macro_use]
+extern crate diesel;
 
 use actix_web::{App, HttpServer, HttpResponse, Responder};
 use actix_web::web;
 use actix_files::{Files, NamedFile};
 use serde::{Serialize};
-
-#[macro_use]
-extern crate diesel;
-extern crate dotenv;
-
 use diesel::prelude::*;
+use crate::schema::cats::dsl::*;
 use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
@@ -24,22 +21,18 @@ struct Cats {
 }
 
 async fn alive() -> impl Responder {
-    println!("alive");
     "alive"
 }
 
 async fn api_cats() -> HttpResponse {
-    println!("api_cats()");
     let mut conn = establish_connection();
     let query = cats
         .load::<Cats>(&mut conn)
         .expect("Can't query cats.");
-    // dbg!(&query);
     HttpResponse::Ok().json(query)
 }
 
 async fn index() -> Result<NamedFile, std::io::Error> {
-    // HttpResponse::Ok().finish()
     Ok(NamedFile::open("./static/index.html")?)
 }
 
