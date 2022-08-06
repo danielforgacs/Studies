@@ -8,7 +8,7 @@ use actix_web::web;
 use actix_files::{Files, NamedFile};
 use serde::{Serialize};
 use diesel::prelude::*;
-use crate::schema::cats::dsl::*;
+use crate::schema::cat::dsl::*;
 use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
@@ -26,7 +26,7 @@ async fn alive() -> impl Responder {
 
 async fn api_cats() -> HttpResponse {
     let mut conn = establish_connection();
-    let query = cats
+    let query = cat
         .load::<Cats>(&mut conn)
         .expect("Can't query cats.");
     HttpResponse::Ok().json(query)
