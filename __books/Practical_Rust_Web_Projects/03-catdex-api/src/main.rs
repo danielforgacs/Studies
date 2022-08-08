@@ -31,12 +31,10 @@ async fn api_cats(pool: web::Data<Pool<ConnectionManager<PgConnection>>>) -> Htt
         cat.load::<Cats>(&mut conn)
     })
     .await
+    // Clean this up!
     .unwrap()
     .unwrap();
-    // .expect("Query failed.");
-    dbg!(&query);
     HttpResponse::Ok().json(query)
-    // HttpResponse::Ok().finish()
 }
 
 async fn index() -> Result<NamedFile, std::io::Error> {
