@@ -3,8 +3,8 @@ extern crate diesel;
 mod schema;
 
 use diesel::prelude::*;
-use diesel::{PgConnection, Queryable};
-use diesel::r2d2;
+use diesel::{Queryable, PgConnection};
+use diesel::r2d2::{Pool, ConnectionManager};
 use schema::items_table::dsl::*;
 use dotenv;
 
@@ -17,17 +17,12 @@ mod model {
     }
 }
 
-fn establish_db_connection() -> Result<PgConnection, Box<dyn std::error::Error>> {
-    let db_url = std::env::var("DATABASE_URL")?;
-    Ok(PgConnection::establish(&db_url)?)
-}
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv::dotenv().ok();
     let db_url = std::env::var("DATABASE_URL")?;
-    let manager = r2d2::ConnectionManager::<PgConnection>::new(&db_url);
-    let db_conn = establish_db_connection()?;
-    let pool = r2d2::Pool::builder().build(manager)?;
+    let manager = ConnectionManager::<PgConnection>::new(&db_url);
+    let pool = Pool::builder().build(manager)?;
+    let db_conn = pool.get()?;
     let all_items = items_table
         .load::<model::StructItem>(&db_conn);
     dbg!(&all_items);
