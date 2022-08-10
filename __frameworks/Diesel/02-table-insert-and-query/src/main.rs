@@ -4,6 +4,7 @@ mod schema;
 
 use diesel::prelude::*;
 use diesel::{PgConnection, Queryable};
+use diesel::r2d2;
 use schema::items_table::dsl::*;
 use dotenv;
 
@@ -23,7 +24,10 @@ fn establish_db_connection() -> Result<PgConnection, Box<dyn std::error::Error>>
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv::dotenv().ok();
+    let db_url = std::env::var("DATABASE_URL")?;
+    let manager = r2d2::ConnectionManager::<PgConnection>::new(&db_url);
     let db_conn = establish_db_connection()?;
+    let pool = r2d2::Pool::builder().build(manager)?;
     let all_items = items_table
         .load::<model::StructItem>(&db_conn);
     dbg!(&all_items);
