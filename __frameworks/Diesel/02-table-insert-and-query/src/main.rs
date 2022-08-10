@@ -9,10 +9,10 @@ use dotenv;
 
 mod model {
     use super::*;
-    #[derive(Queryable)]
-    struct StructItem {
+    #[derive(Queryable, Debug)]
+    pub struct StructItem {
         id: i32,
-        item_name_field: String,
+        item_name_field: Option<String>,
     }
 }
 
@@ -24,6 +24,8 @@ fn establish_db_connection() -> Result<PgConnection, Box<dyn std::error::Error>>
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv::dotenv().ok();
     let db_conn = establish_db_connection()?;
-    // let all_items =
+    let all_items = items_table
+        .load::<model::StructItem>(&db_conn);
+    dbg!(&all_items);
     Ok(())
 }
