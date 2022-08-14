@@ -7,10 +7,12 @@ use actix_web::{
     };
 use env_logger;
 use dotenv;
+use log;
 
 const URL: &str = "127.0.0.1:8888";
 
 async fn alive() -> HttpResponse {
+    log::info!("Checking if alive.");
     HttpResponse::Ok().body("Ok")
 }
 
