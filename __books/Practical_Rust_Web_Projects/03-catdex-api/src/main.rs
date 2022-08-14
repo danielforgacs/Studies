@@ -34,8 +34,8 @@ async fn api_cats(pool: web::Data<Pool<ConnectionManager<PgConnection>>>) -> Htt
     })
     .await
     // Clean this up!
-    .unwrap()
-    .unwrap();
+    .expect("Asszem az await hasalt et.")
+    .expect("A db cat load nem ment.");
     HttpResponse::Ok().json(query)
 }
 
