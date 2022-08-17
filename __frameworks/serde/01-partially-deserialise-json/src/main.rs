@@ -4,7 +4,7 @@ use serde_json;
 #[derive(Deserialize)]
 struct J {
     a: u8,
-    b: u8,
+    // b: u8,
 }
 
 fn main() {
