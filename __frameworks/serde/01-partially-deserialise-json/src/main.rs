@@ -1,4 +1,5 @@
 use serde::Deserialize;
+use serde_json;
 
 #[derive(Deserialize)]
 struct J {
@@ -13,5 +14,8 @@ fn main() {
             "b": 1
         }
     ]"#;
-
+    let data: Vec<J> = serde_json::from_str(&json).expect("SHIT");
+    for item in data {
+        println!("data.a: {}", item.a);
+    }
 }
