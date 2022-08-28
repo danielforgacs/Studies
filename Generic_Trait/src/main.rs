@@ -29,12 +29,6 @@ trait GenericPrint {
     fn get_instance(self) -> Self;
 }
 
-// trait CallingGenericFunc {
-//     fn call_the_func() {
-//         generic_func()
-//     };
-// }
-
 impl GenericPrint for A {
     fn call_print_self(&self) {
         self.print_self();
@@ -68,6 +62,9 @@ fn main() {
 
     a.genp();
     b.genp();
+
+    println!("items: {:?}", generic_func(&a));
+    println!("items: {:?}", generic_func(&b));
 
     println!("items: {:?}", generic_func::<A>(&a));
     println!("items: {:?}", generic_func::<B>(&b));
