@@ -25,10 +25,16 @@ trait GenericPrint {
     }
 }
 
+impl GenericPrint for A {}
+impl GenericPrint for B {}
+
 fn main() {
     let a = A {};
     let b = B {};
 
     a.print_self();
     b.print_self();
+
+    a.genp();
+    b.genp();
 }
