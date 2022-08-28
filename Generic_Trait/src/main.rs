@@ -21,7 +21,7 @@ trait GenericPrint {
     where
         Self: std::fmt::Debug
     {
-        println!("generic print: {:?}", self);
+        println!("generic print: {:?}, cloned: {:?}", self, self.clone());
     }
 }
 
