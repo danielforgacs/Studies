@@ -49,6 +49,10 @@ impl GenericPrint for B {
     }
 }
 
+fn generic_func<T>(item: &T) -> [&T; 2] {
+    [&item, &item]
+}
+
 fn main() {
     let a = A {};
     let b = B {};
@@ -58,4 +62,7 @@ fn main() {
 
     a.genp();
     b.genp();
+
+    println!("items: {:?}", generic_func(&a));
+    println!("items: {:?}", generic_func(&b));
 }
