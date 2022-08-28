@@ -16,6 +16,15 @@ impl B {
     }
 }
 
+trait GenericPrint {
+    fn genp(&self)
+    where
+        Self: std::fmt::Debug
+    {
+        println!("generic print: {:?}", self);
+    }
+}
+
 fn main() {
     let a = A {};
     let b = B {};
