@@ -22,11 +22,23 @@ trait GenericPrint {
         Self: std::fmt::Debug
     {
         println!("generic print: {:?}, cloned: {:?}", self, self.clone());
+        self.call_print_self();
+    }
+
+    fn call_print_self(&self);
+}
+
+impl GenericPrint for A {
+    fn call_print_self(&self) {
+        self.print_self();
     }
 }
 
-impl GenericPrint for A {}
-impl GenericPrint for B {}
+impl GenericPrint for B {
+    fn call_print_self(&self) {
+        self.print_self();
+    }
+}
 
 fn main() {
     let a = A {};
