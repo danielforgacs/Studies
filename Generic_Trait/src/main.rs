@@ -26,17 +26,26 @@ trait GenericPrint {
     }
 
     fn call_print_self(&self);
+    fn get_instance(self) -> Self;
 }
 
 impl GenericPrint for A {
     fn call_print_self(&self) {
         self.print_self();
     }
+
+    fn get_instance(self) -> Self {
+        self
+    }
 }
 
 impl GenericPrint for B {
     fn call_print_self(&self) {
         self.print_self();
+    }
+
+    fn get_instance(self) -> Self {
+        self
     }
 }
 
