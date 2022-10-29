@@ -11,7 +11,17 @@ struct Node {
 fn main() {
     let node0 = Node {
         left: NodeLink::Text("A".to_string()),
-        right: Option::Some(NodeLink::Text("B".to_string()))
+        right: Option::Some(NodeLink::Node(Box::new(
+            Node {
+                left: NodeLink::Node(Box::new(
+                    Node {
+                        left: NodeLink::Text("B".to_string()),
+                        right: Some(NodeLink::Text("C".to_string())),
+                    }
+                )),
+                right: Option::None,
+            }
+        )))
     };
     node_visitor(node0);
 }
