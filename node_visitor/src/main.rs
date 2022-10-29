@@ -6,16 +6,28 @@ enum Node {
 }
 
 fn main() {
-    let node0 = Node::End;
+    let node0 = Node::Text("asdjfh".to_string());
+    let node0 = Node::NodeL(
+        Box::new(
+            Node::Text("nested".to_string())
+        )
+    );
     node_visitor(node0);
 }
 
 fn node_visitor(node: Node) {
     match node {
-        Node::NodeL(node) => (),
-        Node::NodeR(Option::Some(node)) => (),
-        Node::NodeR(Option::None) => (),
-        Node::Text(text) => (),
-        Node::End => (),
+        Node::NodeL(node) => {
+            node_visitor(*node);
+        },
+        Node::NodeR(Option::Some(node)) => {
+        },
+        Node::NodeR(Option::None) => {
+        },
+        Node::Text(text) => {
+            println!("{}", text);
+        },
+        Node::End => {
+        },
     }
 }
