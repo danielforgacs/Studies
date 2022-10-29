@@ -1,33 +1,21 @@
-enum Node {
-    NodeL(Box<Node>),
-    NodeR(Option<Box<Node>>),
+enum NodeLink {
+    Node(Box<Node>),
     Text(String),
-    End,
+}
+
+struct Node {
+    left: NodeLink,
+    right: Option<NodeLink>
 }
 
 fn main() {
-    let node0 = Node::Text("asdjfh".to_string());
-    let node0 = Node::NodeL(
-        Box::new(
-            Node::Text("nested".to_string())
-        )
-    );
+    let node0 = Node { left: NodeLink::Text("A".to_string()), right: Option::None };
     node_visitor(node0);
 }
 
 fn node_visitor(node: Node) {
-    match node {
-        Node::NodeL(node) => {
-            node_visitor(*node);
-        },
-        Node::NodeR(Option::Some(node)) => {
-        },
-        Node::NodeR(Option::None) => {
-        },
-        Node::Text(text) => {
-            println!("{}", text);
-        },
-        Node::End => {
-        },
+    match node.left {
+        NodeLink::Text(text) => println!("{}", text),
+        _ => (),
     }
 }
