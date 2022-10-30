@@ -28,11 +28,12 @@ fn main() {
 
 fn node_visitor(node: Node) {
     match node.left {
+        NodeLink::Node(node) => node_visitor(*node),
         NodeLink::Text(text) => println!("{}", text),
-        _ => (),
     }
     match node.right {
+        Option::Some(NodeLink::Node(node)) => node_visitor(*node),
         Option::Some(NodeLink::Text(text)) => println!("{}", text),
-        _ => (),
+        Option::None => {},
     }
 }
