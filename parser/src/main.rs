@@ -53,6 +53,15 @@ fn lex(input: String) -> Result<Vec<LexItem>, String> {
     Ok(result)
 }
 
+fn get_number<T: Iterator<Item = char>>(c: char, it: &mut std::iter::Peekable<T>) -> u64 {
+    let mut number = c.to_string().parse::<u64>().expect("Not a digit.");
+    while let Some(Ok(digit)) = it.peek().map(|s| s.to_string().parse::<u64>()) {
+        number = number * 10 + digit;
+        it.next();
+    }
+    number
+}
+
 fn main() {
     println!("Hello, world!");
 }
