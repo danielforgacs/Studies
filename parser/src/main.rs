@@ -1,3 +1,4 @@
+#[derive(Debug)]
 enum GrammarItem {
     Product,
     Sum,
@@ -5,12 +6,14 @@ enum GrammarItem {
     Paren,
 }
 
+#[derive(Debug)]
 enum LexItem {
     Paren(char),
     Op(char),
     Num(u64),
 }
 
+#[derive(Debug)]
 struct ParseNode {
     children: Vec<ParseNode>,
     entry: GrammarItem,
@@ -63,5 +66,6 @@ fn get_number<T: Iterator<Item = char>>(c: char, it: &mut std::iter::Peekable<T>
 }
 
 fn main() {
-    println!("Hello, world!");
+    let result = lex("() [ {} ] 87567 + [ ] (-+-)".to_string()).unwrap();
+    dbg!(&result);
 }
