@@ -24,6 +24,24 @@ fn main() {
         )))
     };
     node_visitor(node0);
+    println!("---");
+    let node_h = Box::new(Node { left: NodeLink::Text("H".to_string()), right: Option::None });
+    let node_e = Box::new(Node { left: NodeLink::Text("E".to_string()), right: Option::None });
+    let node_l = Box::new(Node { left: NodeLink::Text("L".to_string()), right: Option::None });
+    let node_lo = Box::new(Node { left: NodeLink::Text("L".to_string()), right: Option::Some(NodeLink::Text("O".to_string())) });
+    let root = Box::new(Node {
+        left: NodeLink::Node(node_l),
+        right: Some(NodeLink::Node(node_lo)),
+    });
+    let root = Box::new(Node {
+        left: NodeLink::Node(node_e),
+        right: Some(NodeLink::Node(root)),
+    });
+    let root = Box::new(Node {
+        left: NodeLink::Node(node_h),
+        right: Some(NodeLink::Node(root)),
+    });
+    node_visitor(*root);
 }
 
 fn node_visitor(node: Node) {
