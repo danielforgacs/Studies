@@ -92,6 +92,25 @@ fn parse_expr(tokens: &Vec<LexItem>, pos: usize) -> Result<(ParseNode, usize), S
     }
 }
 
+fn parse_summand(tokens: &Vec<LexItem>, pos: usize) -> Result<(ParseNode, usize), String> {
+    let (node_term, next_pos) = parse_term(tokens, pos)?;
+    let c = tokens.get(next_pos);
+    match c {
+        Some(&LexItem::Op('*')) => {
+            let mut sum = ParseNode::new();
+            sum.entry = GrammarItem::Product;
+            sum.children.push(node_term);
+            let (rhs, i) = parse_expr(tokens, next_pos + 1)?;
+            sum.children.push(rhs);
+            Ok((sum, i))
+        }
+        _ => {
+            Ok((node_term, next_pos))
+        }
+    }
+
+}
+
 fn main() {
     let result = lex("() [ {} ] 87567 + [ ] (-+-)".to_string()).unwrap();
     dbg!(&result);
