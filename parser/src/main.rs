@@ -65,6 +65,33 @@ fn get_number<T: Iterator<Item = char>>(c: char, it: &mut std::iter::Peekable<T>
     number
 }
 
+fn parse(input: String) -> Result<ParseNode, String> {
+    let tokens = lex(input)?;
+    parse_expr(&tokens, 0).and_then(|(n, i)| if i == tokens.len() {
+            Ok(n)
+        } else {
+            Err("shit".to_string())
+    })
+}
+
+fn parse_expr(tokens: &Vec<LexItem>, pos: usize) -> Result<(ParseNode, usize), String> {
+    let (node_summand, next_pos) = parse_summand(tokens, pos)?;
+    let c = tokens.get(next_pos);
+    match c {
+        Some(&LexItem::Op('+')) => {
+            let mut sum = ParseNode::new();
+            sum.entry = GrammarItem::Sum;
+            sum.children.push(node_summand);
+            let (rhs, i) = parse_expr(tokens, next_pos + 1)?;
+            sum.children.push(rhs);
+            Ok((sum, i))
+        }
+        _ => {
+            Ok((node_summand, next_pos))
+        }
+    }
+}
+
 fn main() {
     let result = lex("() [ {} ] 87567 + [ ] (-+-)".to_string()).unwrap();
     dbg!(&result);
