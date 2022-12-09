@@ -1,0 +1,11 @@
+* {
+    margin: 5px;
+    padding: 2px;
+    box-sizing: border-box;
+    border: 1px;
+    border-style: dotted;
+}
+
+body {
+    width: 400px;
+}
