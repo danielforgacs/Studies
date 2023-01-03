@@ -1,15 +1,12 @@
 fn main() {
-    merge_sort(vec![1, 2]);
+    merge_sort(&mut vec![1, 2]);
 }
 
-fn merge_sort(a: Vec<u8>) -> Vec<u8> {
-    println!("a: {:?}", a);
-    if a.len() <= 2 {
-        return a;
-    } else {
+fn merge_sort(a: &mut Vec<u8>) {
+    let l =  a.len();
+    let h = l % 2;
+    println!("array lenght: {}", l);
 
-    }
-    vec![]
 }
 
 #[cfg(test)]
@@ -18,19 +15,22 @@ mod tests {
 
     #[test]
     fn test_merge_sort_n0() {
-        let array = vec![];
-        assert_eq!(merge_sort(array), vec![]);
+        let mut array = vec![];
+        merge_sort(&mut array);
+        assert_eq!(array, vec![]);
     }
 
     #[test]
     fn test_merge_sort_n1() {
-        let array = vec![1];
-        assert_eq!(merge_sort(array), vec![1]);
+        let mut array = vec![1];
+        merge_sort(&mut array);
+        assert_eq!(array, vec![1]);
     }
 
     #[test]
     fn test_merge_sort_n2() {
-        let array = vec![2, 1];
-        assert_eq!(merge_sort(array), vec![1, 2]);
+        let mut array = vec![2, 1];
+        merge_sort(&mut array);
+        assert_eq!(array, vec![1, 2]);
     }
 }
