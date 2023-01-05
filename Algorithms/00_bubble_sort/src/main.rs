@@ -35,4 +35,11 @@ mod tests {
         bubble_sort(&mut a);
         assert_eq!(a, vec![1, 2]);
     }
+
+    #[test]
+    fn case_02() {
+        let mut a = vec![2, 1, 9, 3, 8, 4, 7, 5];
+        bubble_sort(&mut a);
+        assert_eq!(a, vec![1, 2, 3, 4, 5, 7, 8, 9]);
+    }
 }
