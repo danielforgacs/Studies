@@ -4,8 +4,11 @@ fn main() {
 
 fn merge_sort(a: &mut Vec<u8>) {
     let l =  a.len();
+    if l <= 1 {
+        return;
+    }
     let h = l % 2;
-    println!("array lenght: {}", l);
+    println!(":::array lenght:{}", l);
 
 }
 
