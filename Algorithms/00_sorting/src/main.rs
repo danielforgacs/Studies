@@ -20,12 +20,12 @@ fn insertion_sort(a: &mut Vec<i32>) {
  */
     for j in 1..a.len() {
         let key = a[j];
-        let mut i = j - 1;
-        while i > 0 && a[i] > key {
-            a[i+1] = a[i];
+        let mut i: i32 = j as i32 - 1;
+        while i >= 0 && a[i as usize] > key {
+            a[(i+1) as usize] = a[i as usize];
             i -= 1;
         }
-        a[i+1] = key;
+        a[(i+1) as usize] = key;
     }
 }
 
