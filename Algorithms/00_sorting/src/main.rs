@@ -28,10 +28,15 @@ fn insertion_sort(a: &mut Vec<i32>) {
         below zero in the loop. But usize can not
         go below zero, so that variable needs
         to be type cast when it's used as an index.
+
+        from the book:
+            while i > 0 && a[i as usize] > key {
+        this is a fix:
+            while i >= 0 && a[i as usize] > key {
         */
-        while i >= 0 && a[i as usize] > key {
+        while i > -1 && a[i as usize] > key {
             a[(i+1) as usize] = a[i as usize];
-            // This goes below zero for the 1st element
+            // This goes below zero for the 1st element (index 0)
             // So this can't just be usize!
             i -= 1;
         }
