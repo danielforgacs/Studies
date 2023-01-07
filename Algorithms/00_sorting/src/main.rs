@@ -6,15 +6,18 @@ fn main() {
 }
 
 fn insertion_sort(a: &mut Vec<i32>) {
-    // for j in 1..a.len() {
-    //     let mut i = j;
-    //     while i > 0 && a[i-1] > a[i] {
-    //         let temp = a[i-1];
-    //         a[i-1] = a[i];
-    //         a[i] = temp;
-    //         i -= 1;
-    //     }
-    // }
+/*
+    THIS WORKS AS WEll
+    for j in 1..a.len() {
+        let mut i = j;
+        while i > 0 && a[i-1] > a[i] {
+            let temp = a[i-1];
+            a[i-1] = a[i];
+            a[i] = temp;
+            i -= 1;
+        }
+    }
+ */
     for j in 1..a.len() {
         let key = a[j];
         let mut i = j - 1;
