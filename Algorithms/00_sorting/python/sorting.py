@@ -7,8 +7,12 @@ def insertion_sort(a):
             i -= 1
         a[i+1] = key
 
-if __name__ == '__main__':
+def test_insertion_sort():
     a = [500, 400, 300, 200, 100]
     insertion_sort(a)
     assert a == sorted(a), a
-    print(a)
+
+
+
+# if __name__ == '__main__':
+#     print(a)
