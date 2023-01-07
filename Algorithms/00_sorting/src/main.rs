@@ -49,7 +49,7 @@ fn insertion_sort_no_cast(a: &mut Vec<i32>) {
     below zero while working, so no type cast is needed.
     But this way the indexes are shifted with one higher.
     */
-    for mut k in 2..=a.len() {
+    for k in 2..=a.len() {
         let key = a[k - 1];
         let mut i = k - 1;
         while i > 0 && a[i - 1] > key {
