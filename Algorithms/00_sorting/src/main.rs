@@ -31,6 +31,8 @@ fn insertion_sort(a: &mut Vec<i32>) {
         */
         while i >= 0 && a[i as usize] > key {
             a[(i+1) as usize] = a[i as usize];
+            // This goes below zero for the 1st element
+            // So this can't just be usize!
             i -= 1;
         }
         a[(i+1) as usize] = key;
