@@ -21,6 +21,14 @@ fn insertion_sort(a: &mut Vec<i32>) {
     for j in 1..a.len() {
         let key = a[j];
         let mut i: i32 = j as i32 - 1;
+        /*
+        The book uses 1 based indexes.
+        If i > 0 is checked, the 1st (index 0) element
+        is skipped. If index 0 is included i goes
+        below zero in the loop. But usize can not
+        go below zero, so that variable needs
+        to be type cast when it's used as an index.
+        */
         while i >= 0 && a[i as usize] > key {
             a[(i+1) as usize] = a[i as usize];
             i -= 1;
