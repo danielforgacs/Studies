@@ -1,6 +1,8 @@
 fn main() {
-    let mut a = vec![555, 444, 333, 222, 111];
-    insertion_sort_no_cast(&mut a);
+    // let mut a = vec![555, 444, 333, 222, 111];
+    let mut a = vec![777, 666, 555, 444, 333, 222, 111];
+    // let mut a = vec![555, 444, 333, 222, 111];
+    merge_sort(&mut a);
     println!("a: {:?}", a);
 }
 
@@ -60,6 +62,48 @@ fn insertion_sort_no_cast(a: &mut Vec<i32>) {
     }
 }
 
+fn merge_sort(a: &mut Vec<i32>) {
+    // if the array lenght is 1 we can start merging
+    if a.len() < 2 {
+        return;
+    }
+    // find the middle to cut the array in two sub-array
+    let m = a.len() / 2;
+    let mut l = a[..m].to_owned();
+    let mut r = a[m..].to_owned();
+    // sorting left half, right half independently before merging them.
+    merge_sort(&mut l);
+    merge_sort(&mut r);
+    // going through the array we take the smaller element
+    // from it's two already sorted subarrays picking always
+    // the smaller element. If one of the two sub-arrays
+    // runs out of elements, the other sorted sub-arrays
+    // elements are added.
+    let mut li = 0;
+    let mut ri = 0;
+    for i in 0..a.len() {
+        if li == l.len() {
+            a[i] = r[ri];
+            ri += 1;
+            continue;
+        }
+        if ri == r.len() {
+            a[i] = l[li];
+            li += 1;
+            continue;
+        }
+        if l[li] < r[ri] {
+            a[i] = l[li];
+            li += 1;
+        } else {
+            a[i] = r[ri];
+            ri += 1;
+        }
+    }
+
+
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -76,5 +120,12 @@ mod test {
         let mut a = vec![7, 6, 5, 4, 3, 2, 1];
         insertion_sort_no_cast(&mut a);
         assert_eq!(a, vec![1, 2, 3, 4, 5, 6, 7]);
+    }
+
+    #[test]
+    fn test_merge_sort() {
+        let mut a = vec![999, 888, 777, 666, 555, 444, 333, 222, 111];
+        merge_sort(&mut a);
+        assert_eq!(a, vec![111, 222, 333, 444, 555, 666, 777, 888, 999]);
     }
 }
