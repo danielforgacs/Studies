@@ -4,10 +4,10 @@ pub struct Base {
 }
 
 impl Base {
-    pub fn new(title: &str, status: &str) -> Self {
+    pub fn new(input_title: &str, input_status: &str) -> Self {
         Self {
-            title: title.to_string(),
-            status: status.to_string(),
+            title: input_title.to_string(),
+            status: input_status.to_string(),
         }
     }
 }
