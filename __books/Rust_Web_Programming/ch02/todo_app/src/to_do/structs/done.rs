@@ -6,10 +6,7 @@ pub struct Done {
 
 impl Done {
     pub fn new(input_title: &str) -> Self {
-        let super_struct = Base {
-            title: input_title.to_string(),
-            status: "done".to_string(),
-        };
+        let super_struct = Base::new(input_title, "done");
         Self { super_struct }
     }
 }
