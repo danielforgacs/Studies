@@ -1,5 +1,5 @@
 pub trait Create {
-    fn get(&self, title: &str) {
-        println!("{}'' is being created.", title);
+    fn create(&self, title: &str) {
+        println!("'{}' is being created.", title);
     }
 }
