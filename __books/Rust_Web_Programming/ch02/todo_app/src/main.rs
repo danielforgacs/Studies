@@ -9,7 +9,7 @@ use to_do::{
 
 fn main() {
     let to_do_item = to_do_factory("pending", "pending item");
-    match to_do_item.unwrap() {
+    match to_do_item.expect("could not create todo item.") {
         ItemTypes::Pending(item) => item.create(&item.super_struct.title),
         ItemTypes::Done(item) => println!("item: \"{}\" is done.", item.super_struct.title),
     }
