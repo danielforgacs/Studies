@@ -20,6 +20,10 @@ pub fn read_file(file_name: &str) -> Map<String, Value> {
 }
 
 pub fn write_to_file(file_name: &str, state: &Map<String, Value>) {
-    let new_data = json!(state);
-    fs::write(file_name.to_string(), new_data.to_string()).expect("Can not write json data.");
+    // let new_data = json!(state);
+    // fs::write(file_name.to_string(), new_data.to_string()).expect("Can not write json data.");
+    let new_data = serde_json::to_string_pretty(&state).expect(
+        "Could not serialise the data to pretty string."
+    );
+    fs::write(file_name.to_string(), new_data).expect("Could not write json file.");
 }

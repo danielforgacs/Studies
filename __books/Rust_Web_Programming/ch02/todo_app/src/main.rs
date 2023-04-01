@@ -13,8 +13,8 @@ const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
-    let status = &args[1];
-    let title = &args[2];
+    let status = &args.get(1).expect("[ERROR] Add a status argument.");
+    let title = &args.get(2).expect("[ERROR] Add a title argument.");
     let mut state = read_file(PERSISTENCE_FILE_NAME);
     println!("state: {:?}", state);
     state.insert(title.to_string(), json!(status));
