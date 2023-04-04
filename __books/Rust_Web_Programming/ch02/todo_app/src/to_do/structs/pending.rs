@@ -6,6 +6,7 @@ use super::traits::{
     delete::Delete,
 };
 
+#[derive(Debug)]
 pub struct Pending {
     pub super_struct: Base,
 }

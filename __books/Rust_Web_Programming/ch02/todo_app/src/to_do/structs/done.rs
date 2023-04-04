@@ -5,6 +5,7 @@ use super::traits::{
     delete::Delete,
 };
 
+#[derive(Debug)]
 pub struct Done {
     pub super_struct: Base,
 }

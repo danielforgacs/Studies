@@ -13,7 +13,7 @@ pub const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
-    let command = &args.get(1).expect("[ERROR] Add a status argument.");
+    let command = &args.get(1).expect("[ERROR] Add a command argument.");
     let title = args.get(2).expect("[ERROR] Add a title argument.");
     let mut state = read_file(PERSISTENCE_FILE_NAME);
     let status: String;
@@ -22,5 +22,6 @@ fn main() {
         None => {status = "pending".to_string()},
     }
     let item = to_do_factory(&status, title).expect(&status);
+    println!("factory item: {:?}", &item);
     process_input(item, command.to_string(), &mut state);
 }

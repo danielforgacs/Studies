@@ -5,6 +5,7 @@ use structs::{
     pending::Pending,
 };
 
+#[derive(Debug)]
 pub enum ItemTypes {
     Pending(Pending),
     Done(Done),
