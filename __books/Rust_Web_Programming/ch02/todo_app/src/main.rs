@@ -9,7 +9,7 @@ use to_do::{
 use state::{write_to_file, read_file};
 use serde_json::{json};
 
-const PERSISTENCE_FILE_NAME: &str = "./state.json";
+pub const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
