@@ -15,4 +15,10 @@ fn main() {
     let outcome = block_on(future_one);
     println!("elapsed time: {:?}", now.elapsed());
     println!("here is the outcome: {}", outcome);
+    let future_two = async {
+        do_something(2).await
+    };
+    let future_two = block_on(future_two);
+    println!("here is the outcome: {}", future_two);
+    println!("elapsed time: {:?}", now.elapsed());
 }
