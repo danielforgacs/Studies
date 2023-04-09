@@ -1,4 +1,5 @@
-use std::time::Duration;
+use futures::executor::block_on;
+use std::time::{Duration, Instant};
 use std::thread::sleep;
 
 async fn do_something(number: i8) -> i8 {
@@ -9,4 +10,9 @@ async fn do_something(number: i8) -> i8 {
 }
 
 fn main() {
+    let now = Instant::now();
+    let future_one = do_something(1);
+    let outcome = block_on(future_one);
+    println!("elapsed time: {:?}", now.elapsed());
+    println!("here is the outcome: {}", outcome);
 }
