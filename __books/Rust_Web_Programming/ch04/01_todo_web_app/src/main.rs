@@ -1,4 +1,4 @@
-mod to_do;
+/* mod to_do;
 mod state;
 mod processes;
 
@@ -25,3 +25,18 @@ fn main() {
     println!("factory item: {:?}", &item);
     process_input(item, command.to_string(), &mut state);
 }
+ */
+
+ mod views;
+ use actix_web::{App, HttpServer};
+
+ #[actix_web::main]
+ async fn main() -> std::io::Result<()> {
+     HttpServer::new(|| {
+         App::new()
+         .configure(views::views_factory)
+     })
+         .bind(("127.0.0.1", 8080))?
+         .run()
+         .await
+ }
