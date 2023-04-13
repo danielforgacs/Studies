@@ -1,4 +1,6 @@
-/* mod to_do;
+/*
+// THIS IS MAIN FROM CHAPTER 02 TO_DO APP PROJECT.
+mod to_do;
 mod state;
 mod processes;
 
@@ -25,7 +27,7 @@ fn main() {
     println!("factory item: {:?}", &item);
     process_input(item, command.to_string(), &mut state);
 }
- */
+*/
 
  mod views;
  use actix_web::{App, HttpServer};
