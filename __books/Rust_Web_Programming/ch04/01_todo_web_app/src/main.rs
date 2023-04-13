@@ -1,5 +1,3 @@
-/*
-// THIS IS MAIN FROM CHAPTER 02 TO_DO APP PROJECT.
 mod to_do;
 mod state;
 mod processes;
@@ -13,6 +11,8 @@ use processes::process_input;
 
 pub const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
+/*
+// THIS IS MAIN FROM CHAPTER 02 TO_DO APP PROJECT.
 fn main() {
     let args = std::env::args().collect::<Vec<String>>();
     let command = &args.get(1).expect("[ERROR] Add a command argument.");
