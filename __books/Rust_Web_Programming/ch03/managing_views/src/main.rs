@@ -1,3 +1,4 @@
+mod views;
 use actix_web::{App, HttpServer};
 
 #[actix_web::main]
