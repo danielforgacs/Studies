@@ -1,5 +1,6 @@
 mod path;
 mod auth;
+mod to_do;
 
 use actix_web::web;
 
