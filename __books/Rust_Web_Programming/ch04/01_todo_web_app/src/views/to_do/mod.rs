@@ -1,4 +1,5 @@
 mod create;
+mod get;
 
 use actix_web::web;
 use crate::views::path::Path;
