@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 actix-web = "4.3.1"
 futures = "0.3.28"
-serde = "1.0.160"
+serde = { version = "1.0.160", features = ["derive"] }
 serde_json = { version = "1.0.95", features = ["alloc"] }
