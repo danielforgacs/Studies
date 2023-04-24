@@ -1,15 +1,11 @@
-use actix_web::{HttpRequest, HttpResponse};
 use actix_web::{web, Responder};
 use serde_json::{Value, Map};
-use std::future::Ready;
-use actix_web::http::Error;
-use std::future::ready;
 use crate::state::read_file;
 use crate::PERSISTENCE_FILE_NAME;
 use crate::to_do::to_do_factory;
 use crate::json_serialization::to_do_items::ToDoItems;
 
-pub async fn get() -> ToDoItems {
+pub async fn get() -> impl Responder {
     let state = read_file(PERSISTENCE_FILE_NAME);
     let mut array_buffer = Vec::new();
     for (key, value) in state {
@@ -18,28 +14,6 @@ pub async fn get() -> ToDoItems {
         array_buffer.push(item);
 
     }
-    ToDoItems::new(array_buffer)
+    let return_package = ToDoItems::new(array_buffer);
+    web::Json(return_package)
 }
-
-impl Responder for ToDoItems {
-    type Error = Error;
-    type Future = Ready<Result<HttpResponse, Error>>;
-
-    fn respond_to(self, req: &HttpRequest) -> Self::Future {
-        let body = serde_json::to_string(&self).expect("Resnponder trait:: can't serialize");
-        ready(Ok(HttpResponse::Ok().content_type("application/json").body(body)))
-
-    }
-}
-// impl Responder for ToDoItems {
-//     type Body: MessageBody + 'static;
-
-//     // Required method
-//     fn respond_to(self, req: &HttpRequest) -> HttpResponse<Self::Body> {
-//         HttpResponse::build(status)
-//     }
-
-//     // // Provided method
-//     // fn customize(self) -> CustomizeResponder<Self>
-//     //    where Self: Sized { ... }
-// }
