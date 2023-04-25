@@ -5,7 +5,7 @@ use crate::PERSISTENCE_FILE_NAME;
 use crate::to_do::to_do_factory;
 use crate::json_serialization::to_do_items::ToDoItems;
 
-pub async fn get() -> impl Responder {
+pub async fn get() -> ToDoItems {
     let state = read_file(PERSISTENCE_FILE_NAME);
     let mut array_buffer = Vec::new();
     for (key, value) in state {
@@ -14,6 +14,5 @@ pub async fn get() -> impl Responder {
         array_buffer.push(item);
 
     }
-    let return_package = ToDoItems::new(array_buffer);
-    web::Json(return_package)
+    ToDoItems::new(array_buffer)
 }

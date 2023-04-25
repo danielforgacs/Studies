@@ -1,3 +1,5 @@
+use actix_web::Responder;
+use actix_web::{HttpRequest, HttpResponse};
 use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
 use serde::Serialize;
@@ -31,5 +33,14 @@ impl ToDoItems {
             pending_item_count: pending_count,
             donr_item_count: done_count,
         }
+    }
+}
+
+impl Responder for ToDoItems {
+    type Body = actix_web::body::BoxBody;
+
+
+    fn respond_to(self, req: &HttpRequest) -> HttpResponse<Self::Body> {
+        HttpResponse::Ok().body(String::from("hey"))
     }
 }
