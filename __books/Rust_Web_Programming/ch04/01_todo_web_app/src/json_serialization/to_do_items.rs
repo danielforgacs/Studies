@@ -39,8 +39,10 @@ impl ToDoItems {
 impl Responder for ToDoItems {
     type Body = actix_web::body::BoxBody;
 
-
     fn respond_to(self, req: &HttpRequest) -> HttpResponse<Self::Body> {
-        HttpResponse::Ok().body(String::from("hey"))
+        let json_body = serde_json::to_string_pretty(&self).expect("Can't serialize ToDoItems.");
+        HttpResponse::Ok()
+        .content_type("application/json")
+        .body(json_body)
     }
 }
