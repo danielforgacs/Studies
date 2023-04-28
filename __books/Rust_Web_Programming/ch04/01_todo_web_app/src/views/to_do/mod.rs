@@ -1,6 +1,7 @@
 mod create;
 mod get;
 mod utils;
+mod edit;
 
 use actix_web::web;
 use crate::views::path::Path;
