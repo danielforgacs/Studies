@@ -9,6 +9,8 @@ use to_do::{
 };
 use state::{write_to_file, read_file};
 use processes::process_input;
+use views::token::process_token;
+use actix_web::dev::Service;
 
 pub const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
@@ -37,6 +39,19 @@ fn main() {
  async fn main() -> std::io::Result<()> {
      HttpServer::new(|| {
          App::new()
+         .wrap_fn(|req, srv| {
+            if req.path().contains("/item/") {
+                match process_token(&req) {
+                    Ok(_) => println!("The token is passable!"),
+                    Err(message) => println!("token error: {}", message),
+                }
+            };
+            let fut = srv.call(req);
+            async {
+                let result = fut.await?;
+                Ok(result)
+            }
+         })
          .configure(views::views_factory)
      })
          .bind(("127.0.0.1", 8080))?
