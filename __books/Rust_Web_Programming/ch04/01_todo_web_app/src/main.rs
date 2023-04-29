@@ -1,4 +1,3 @@
-mod app;
 mod json_serialization;
 mod processes;
 mod state;
