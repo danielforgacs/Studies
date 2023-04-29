@@ -9,5 +9,19 @@
     </head>
     <body>
         <h1>to do items</h1>
+        <input type="text" id="name" placeholder="create to do item">
+        <button id="create-button" value="send">create</button>
     </body>
+    <script>
+        let create_button = document.getElementById("create-button")
+        console.log("::create button: ", create_button)
+        create_button.addEventListener("click", post_alert)
+
+        function post_alert() {
+            let title_input = document.getElementById("name");
+            console.log("::title_input: ", title_input)
+            alert(title_input.value)
+            title_input.value = null
+        }
+    </script>
 </html>
