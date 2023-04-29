@@ -10,11 +10,9 @@ fn check_password(password: String) -> Result<String, &'static str> {
 
 fn extract_header_token(request: &ServiceRequest) -> Result<String, &'static str> {
     match request.headers().get("user-token") {
-        Some(token) => {
-            match token.to_str() {
-                Ok(processed_password) => Ok(String::from(processed_password)),
-                Err(_) => Err(r#"there was an error processing the "user-token" header."#),
-            }
+        Some(token) => match token.to_str() {
+            Ok(processed_password) => Ok(String::from(processed_password)),
+            Err(_) => Err(r#"there was an error processing the "user-token" header."#),
         },
         None => Err(r#"The "user-token" header is missing."#),
     }

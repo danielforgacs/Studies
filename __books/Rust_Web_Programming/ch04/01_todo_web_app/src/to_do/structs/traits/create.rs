@@ -1,8 +1,4 @@
-use serde_json::{
-    json,
-    Map,
-    value::Value,
-};
+use serde_json::{json, value::Value, Map};
 
 use crate::write_to_file;
 use crate::PERSISTENCE_FILE_NAME;

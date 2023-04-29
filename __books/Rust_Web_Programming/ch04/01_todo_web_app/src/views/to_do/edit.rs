@@ -1,12 +1,12 @@
+use super::utils::return_state;
+use crate::json_serialization::to_do_items::ToDoItem;
+use crate::processes::process_input;
+use crate::state::read_file;
+use crate::to_do::to_do_factory;
+use crate::PERSISTENCE_FILE_NAME;
 use actix_web::{web, HttpResponse};
 use serde_json::value::Value;
 use serde_json::Map;
-use super::utils::return_state;
-use crate::state::read_file;
-use crate::to_do::to_do_factory;
-use crate::json_serialization::to_do_items::ToDoItem;
-use crate::processes::process_input;
-use crate::PERSISTENCE_FILE_NAME;
 
 pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     // Getting the title and the status we want to edit.
@@ -25,7 +25,7 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     // and it's status is the same as what we want to edit
     // return the state as ok.
     if &status == &to_do_item.status {
-        return HttpResponse::Ok().json(return_state())
+        return HttpResponse::Ok().json(return_state());
     }
 
     // if the todo item is found

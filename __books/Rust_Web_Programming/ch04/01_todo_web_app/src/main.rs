@@ -1,17 +1,14 @@
-mod to_do;
-mod state;
-mod processes;
-mod json_serialization;
 mod app;
+mod json_serialization;
+mod processes;
+mod state;
+mod to_do;
 
-use to_do::{
-    ItemTypes,
-    to_do_factory,
-};
-use state::{write_to_file, read_file};
-use processes::process_input;
-use views::token::process_token;
 use actix_web::dev::Service;
+use processes::process_input;
+use state::{read_file, write_to_file};
+use to_do::{to_do_factory, ItemTypes};
+use views::token::process_token;
 
 pub const PERSISTENCE_FILE_NAME: &str = "./state.json";
 
@@ -33,29 +30,29 @@ fn main() {
 }
 */
 
- mod views;
- use actix_web::{App, HttpServer};
+mod views;
+use actix_web::{App, HttpServer};
 
- #[actix_web::main]
- async fn main() -> std::io::Result<()> {
-     HttpServer::new(|| {
-         App::new()
-         .wrap_fn(|req, srv| {
-            if req.path().contains("/item/") {
-                match process_token(&req) {
-                    Ok(_) => println!("The token is passable!"),
-                    Err(message) => println!("token error: {}", message),
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new()
+            .wrap_fn(|req, srv| {
+                if req.path().contains("/item/") {
+                    match process_token(&req) {
+                        Ok(_) => println!("The token is passable!"),
+                        Err(message) => println!("token error: {}", message),
+                    }
+                };
+                let fut = srv.call(req);
+                async {
+                    let result = fut.await?;
+                    Ok(result)
                 }
-            };
-            let fut = srv.call(req);
-            async {
-                let result = fut.await?;
-                Ok(result)
-            }
-         })
-         .configure(views::views_factory)
-     })
-         .bind(("127.0.0.1", 8080))?
-         .run()
-         .await
- }
+            })
+            .configure(views::views_factory)
+    })
+    .bind(("127.0.0.1", 8080))?
+    .run()
+    .await
+}

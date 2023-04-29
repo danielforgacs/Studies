@@ -1,10 +1,5 @@
 use super::base::*;
-use super::traits::{
-    create::Create,
-    get::Get,
-    edit::Edit,
-    delete::Delete,
-};
+use super::traits::{create::Create, delete::Delete, edit::Edit, get::Get};
 
 #[derive(Debug)]
 pub struct Pending {

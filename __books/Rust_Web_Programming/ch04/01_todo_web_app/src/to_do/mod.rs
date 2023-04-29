@@ -1,9 +1,6 @@
 pub mod structs;
 
-use structs::{
-    done::Done,
-    pending::Pending,
-};
+use structs::{done::Done, pending::Pending};
 
 #[derive(Debug)]
 pub enum ItemTypes {

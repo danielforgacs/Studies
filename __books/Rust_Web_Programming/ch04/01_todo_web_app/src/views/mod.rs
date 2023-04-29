@@ -1,5 +1,5 @@
-mod path;
 mod auth;
+mod path;
 mod to_do;
 pub mod token;
 
