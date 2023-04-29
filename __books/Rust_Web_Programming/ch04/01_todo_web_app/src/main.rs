@@ -2,6 +2,7 @@ mod to_do;
 mod state;
 mod processes;
 mod json_serialization;
+mod app;
 
 use to_do::{
     ItemTypes,
