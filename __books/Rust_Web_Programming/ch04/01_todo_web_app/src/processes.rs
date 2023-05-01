@@ -11,7 +11,7 @@ use serde_json::Map;
 fn process_pending(item: Pending, command: String, state: &mut Map<String, Value>) {
     let mut state = state.clone();
     match command.as_str() {
-        "get" => item.get(&item.super_struct.title, &mut state),
+        "get" => item.get(&item.super_struct.title, &state),
         "create" => item.create(
             &item.super_struct.title,
             &item.super_struct.status,
@@ -26,7 +26,7 @@ fn process_pending(item: Pending, command: String, state: &mut Map<String, Value
 fn process_done(item: Done, command: String, state: &mut Map<String, Value>) {
     let mut state = state.clone();
     match command.as_str() {
-        "get" => item.get(&item.super_struct.title, &mut state),
+        "get" => item.get(&item.super_struct.title, &state),
         "delete" => item.delete(&item.super_struct.title, &mut state),
         "edit" => item.set_to_pending(&item.super_struct.title, &mut state),
         _ => println!(r#"command "{}" not supported"#, command),

@@ -22,7 +22,7 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     // if the todo item is found
     // and it's status is the same as what we want to edit
     // return the state as ok.
-    if &status == &to_do_item.status {
+    if status == to_do_item.status {
         return HttpResponse::Ok().json(return_state());
     }
 
