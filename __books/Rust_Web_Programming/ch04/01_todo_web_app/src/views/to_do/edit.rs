@@ -11,13 +11,12 @@ pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     let mut state = read_file(PERSISTENCE_FILE_NAME);
     let title_reference = &to_do_item.title.clone();
     let title = to_do_item.title.clone();
-    let status: String;
 
     // If the todo item is not found it's an error.
-    match &state.get(title_reference) {
-        Some(result) => status = result.to_string().replace('\"', ""),
+    let status = match &state.get(title_reference) {
+        Some(result) => result.to_string().replace('\"', ""),
         None => return HttpResponse::NotFound().json(format!("{} not in state", title_reference)),
-    }
+    };
 
     // if the todo item is found
     // and it's status is the same as what we want to edit

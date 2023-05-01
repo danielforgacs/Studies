@@ -2,7 +2,7 @@ use serde_json::{self, value::Value, Map};
 use std::{fs, fs::File, io::Read};
 
 pub fn read_file(file_name: &str) -> Map<String, Value> {
-    let mut file = File::open(file_name.to_string()).expect("[ERROR] Can not open file.");
+    let mut file = File::open(file_name).expect("[ERROR] Can not open file.");
     let mut data = String::new();
     file.read_to_string(&mut data)
         .expect(r#"["ERROR"] Can not read file to string."#);
@@ -19,5 +19,5 @@ pub fn write_to_file(file_name: &str, state: &Map<String, Value>) {
     // fs::write(file_name.to_string(), new_data.to_string()).expect("Can not write json data.");
     let new_data = serde_json::to_string_pretty(&state)
         .expect("Could not serialise the data to pretty string.");
-    fs::write(file_name.to_string(), new_data).expect("Could not write json file.");
+    fs::write(file_name, new_data).expect("Could not write json file.");
 }
