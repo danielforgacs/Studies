@@ -1,3 +1,3 @@
 pub async fn login() -> String {
-    format!("login view")
+    "login view".to_string()
 }

@@ -1,9 +1,5 @@
 use super::base::*;
-use super::traits::{
-    get::Get,
-    edit::Edit,
-    delete::Delete,
-};
+use super::traits::{delete::Delete, edit::Edit, get::Get};
 
 #[derive(Debug)]
 pub struct Done {
