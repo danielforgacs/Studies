@@ -5,8 +5,6 @@ use crate::state::read_file;
 use crate::to_do::to_do_factory;
 use crate::PERSISTENCE_FILE_NAME;
 use actix_web::{web, HttpResponse};
-use serde_json::value::Value;
-use serde_json::Map;
 
 pub async fn edit(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     // Getting the title and the status we want to edit.
