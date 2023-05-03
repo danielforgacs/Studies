@@ -1,6 +1,7 @@
 mod create;
 mod edit;
 mod get;
+mod delete;
 mod utils;
 
 use crate::views::path::Path;
@@ -14,6 +15,10 @@ pub fn item_factory(app: &mut web::ServiceConfig) {
     app.route(
         &base_path.define(String::from("/create/{title}")),
         web::post().to(create::create),
+    );
+    app.route(
+        &base_path.define(String::from("/delete/{title}")),
+        web::post().to(delete::delete),
     );
     app.route(
         &base_path.define(String::from("/get")),
