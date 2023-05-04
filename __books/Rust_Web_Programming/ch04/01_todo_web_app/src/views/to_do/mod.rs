@@ -1,7 +1,7 @@
 mod create;
+mod delete;
 mod edit;
 mod get;
-mod delete;
 mod utils;
 
 use crate::views::path::Path;

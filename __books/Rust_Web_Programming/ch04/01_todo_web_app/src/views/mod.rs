@@ -1,7 +1,7 @@
+mod app;
 mod auth;
 mod path;
 mod to_do;
-mod app;
 pub mod token;
 
 use actix_web::web;
