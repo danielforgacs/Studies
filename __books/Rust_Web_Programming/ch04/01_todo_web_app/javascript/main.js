@@ -8,3 +8,20 @@ function post_alert() {
     alert(title_input.value)
     title_input.value = null
 }
+
+
+function renderItems(items, processType, elementID, processFunction) {
+    let placeholder = "<div>"
+    let itemsMeta = []
+    for (i = 0; i < items.length; i++) {
+        let title = items[i]["title"]
+        let placeholderId = processType + "-" + title.replaceAll(" ", "-")
+        placeholder += "<div>" + title + "<button " + 'id="' + placeholderId + '">' + processType + '</button>' + "</div>"
+        itemsMeta.push({"id": placeholderId, "title": title})
+    }
+    placeholder += "</div>"
+    document.getElementById(elementID).innerHTML = placeholder
+    for (i = 0; i < itemsMeta.length; i++) {
+        document.getElementById(itemsMeta[i]["id"]).addEventListener("click", processFunction)
+    }
+}
