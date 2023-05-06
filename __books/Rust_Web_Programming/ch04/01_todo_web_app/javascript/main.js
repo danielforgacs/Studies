@@ -1,15 +1,3 @@
-let create_button = document.getElementById("create-button")
-console.log("::create button: ", create_button)
-// create_button.addEventListener("click", post_alert)
-
-function post_alert() {
-    let title_input = document.getElementById("name");
-    console.log("::title_input: ", title_input)
-    alert(title_input.value)
-    title_input.value = null
-}
-
-
 function renderItems(items, processType, elementID, processFunction) {
     let placeholder = "<div>"
     let itemsMeta = []
@@ -31,6 +19,7 @@ function apiCall(url, method) {
     xhr.withCredentials = true
     xhr.addEventListener('readystatechange', function() {
         if (this.readyState === this.DONE) {
+            console.log('this.responseText', this.responseText)
             renderItems(JSON.parse(this.responseText)["pending_items"], "edit", "pendingItems", editItem)
             renderItems(JSON.parse(this.responseText)["done_items"], "delete", "doneItems", deleteItem)
         }
