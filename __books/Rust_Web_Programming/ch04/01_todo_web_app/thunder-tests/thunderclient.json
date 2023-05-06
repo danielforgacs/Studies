@@ -114,11 +114,15 @@
     "containerId": "",
     "name": "delete washing",
     "url": "http://localhost:8080/item/delete/washing",
-    "method": "GET",
+    "method": "POST",
     "sortNum": 50000,
     "created": "2023-05-06T20:59:44.361Z",
-    "modified": "2023-05-06T21:00:46.394Z",
+    "modified": "2023-05-06T21:03:18.785Z",
     "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
       {
         "name": "Accept",
         "value": "*/*",
@@ -131,6 +135,11 @@
       }
     ],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"washing\",\n  \"status\": \"done\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
