@@ -5,7 +5,7 @@ use actix_web::{HttpRequest, HttpResponse};
 use serde::Deserialize;
 use serde::Serialize;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct ToDoItem {
     pub title: String,
     pub status: String,

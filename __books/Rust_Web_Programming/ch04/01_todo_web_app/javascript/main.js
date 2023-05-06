@@ -19,6 +19,7 @@ function apiCall(url, method) {
     xhr.withCredentials = true
     xhr.addEventListener('readystatechange', function() {
         if (this.readyState === this.DONE) {
+            console.log('url', url)
             console.log('this.responseText', this.responseText)
             renderItems(JSON.parse(this.responseText)["pending_items"], "edit", "pendingItems", editItem)
             renderItems(JSON.parse(this.responseText)["done_items"], "delete", "doneItems", deleteItem)
