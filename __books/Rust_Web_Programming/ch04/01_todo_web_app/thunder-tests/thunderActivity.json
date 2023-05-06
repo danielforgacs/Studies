@@ -8,8 +8,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-05-06T20:36:56.526Z",
-    "modified": "2023-05-06T20:40:37.029Z",
+    "modified": "2023-05-06T20:43:50.034Z",
     "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
       {
         "name": "Accept",
         "value": "*/*",
@@ -19,15 +23,6 @@
         "name": "User-Agent",
         "value": "Thunder Client (https://www.thunderclient.com)",
         "isDisabled": true
-      },
-      {
-        "name": "user-token",
-        "value": "token",
-        "isDisabled": true
-      },
-      {
-        "name": "Content-Type",
-        "value": "application/json"
       }
     ],
     "params": [],
