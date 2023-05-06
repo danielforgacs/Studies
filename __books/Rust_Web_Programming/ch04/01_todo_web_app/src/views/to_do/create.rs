@@ -6,8 +6,10 @@ use actix_web::{HttpRequest, HttpResponse};
 use serde_json::{Map, Value};
 use actix_web::web::Json;
 use crate::json_serialization::to_do_items::ToDoItem;
+use super::utils::return_state;
+use actix_web::Responder;
 
-pub async fn create(req: HttpRequest) -> HttpResponse {
+pub async fn create(req: HttpRequest) -> impl Responder {
     let mut state: Map<String, Value> = read_file(PERSISTENCE_FILE_NAME);
     let title = req
         .match_info()
@@ -17,5 +19,5 @@ pub async fn create(req: HttpRequest) -> HttpResponse {
     let title_ref = title.clone();
     let item = to_do_factory(&String::from("pending"), &title).expect("Can not create item.");
     process_input(item, String::from("create"), &mut state);
-    HttpResponse::Ok().json(ToDoItem { title: "alksdfhj".to_string(), status: "387653865".to_string() })
+    return_state()
 }
