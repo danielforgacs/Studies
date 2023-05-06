@@ -43,7 +43,7 @@ function editItem() {
 
 function deleteItem() {
     let title = this.id.replaceAll("-", " ").replace("edit ", "");
-    let call = apiCall("item/delete", "POST")
+    let call = apiCall("/item/delete", "POST");
     let json = {
         "title": title,
         "status": "done"

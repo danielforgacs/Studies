@@ -113,7 +113,7 @@
     "colId": "83c9195d-1f32-421d-b018-2aceb03dbf42",
     "containerId": "",
     "name": "delete washing",
-    "url": "http://localhost:8080/item/delete/washing",
+    "url": "http://localhost:8080/item/delete",
     "method": "POST",
     "sortNum": 50000,
     "created": "2023-05-06T20:59:44.361Z",

@@ -17,7 +17,7 @@ pub fn item_factory(app: &mut web::ServiceConfig) {
         web::post().to(create::create),
     );
     app.route(
-        &base_path.define(String::from("/delete/{title}")),
+        &base_path.define(String::from("/delete")),
         web::post().to(delete::delete),
     );
     app.route(
