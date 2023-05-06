@@ -83,8 +83,12 @@
     "method": "PUT",
     "sortNum": 40000,
     "created": "2023-04-28T23:28:24.640Z",
-    "modified": "2023-04-28T23:30:12.538Z",
+    "modified": "2023-05-06T20:53:10.474Z",
     "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
       {
         "name": "Accept",
         "value": "*/*",
@@ -94,10 +98,6 @@
         "name": "User-Agent",
         "value": "Thunder Client (https://www.thunderclient.com)",
         "isDisabled": true
-      },
-      {
-        "name": "Content-Type",
-        "value": "application/json"
       }
     ],
     "params": [],
