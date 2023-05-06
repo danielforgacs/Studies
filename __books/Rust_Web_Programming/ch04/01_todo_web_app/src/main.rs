@@ -5,8 +5,8 @@ mod to_do;
 
 use actix_web::dev::Service;
 use processes::process_input;
-use state::{write_to_file};
-use to_do::{ItemTypes};
+use state::write_to_file;
+use to_do::ItemTypes;
 use views::token::process_token;
 
 pub const PERSISTENCE_FILE_NAME: &str = "./state.json";

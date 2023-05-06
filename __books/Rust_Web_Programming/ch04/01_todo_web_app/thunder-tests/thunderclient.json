@@ -83,8 +83,12 @@
     "method": "PUT",
     "sortNum": 40000,
     "created": "2023-04-28T23:28:24.640Z",
-    "modified": "2023-04-28T23:30:12.538Z",
+    "modified": "2023-05-06T20:53:10.474Z",
     "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      },
       {
         "name": "Accept",
         "value": "*/*",
@@ -94,10 +98,40 @@
         "name": "User-Agent",
         "value": "Thunder Client (https://www.thunderclient.com)",
         "isDisabled": true
-      },
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\": \"washing\",\n  \"status\": \"done\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "0d8e3677-ca8d-4830-9bea-af76c2b233b2",
+    "colId": "83c9195d-1f32-421d-b018-2aceb03dbf42",
+    "containerId": "",
+    "name": "delete washing",
+    "url": "http://localhost:8080/item/delete",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-05-06T20:59:44.361Z",
+    "modified": "2023-05-06T21:03:18.785Z",
+    "headers": [
       {
         "name": "Content-Type",
         "value": "application/json"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
       }
     ],
     "params": [],
