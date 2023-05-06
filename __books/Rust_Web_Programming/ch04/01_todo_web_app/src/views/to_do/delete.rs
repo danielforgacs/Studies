@@ -8,6 +8,7 @@ use actix_web::web::Json;
 use actix_web::HttpRequest;
 use actix_web::HttpResponse;
 use serde_json::{Map, Value};
+use super::utils::return_state;
 
 // pub async fn delete(req: HttpRequest) -> String {
 //     let title = req
@@ -36,5 +37,6 @@ pub async fn delete(item: Json<ToDoItem>) -> HttpResponse {
             ))
         }
     };
+    let state = return_state();
     HttpResponse::Ok().json(state)
 }
