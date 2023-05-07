@@ -9,5 +9,5 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=letmein
-    #   - POSTGRES_USER=username
+      -  PGUSER=username
     #   - POSTGRES_DB=todo
