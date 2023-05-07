@@ -16,7 +16,7 @@ pub struct ToDoItems {
     pub pending_items: Vec<Base>,
     pub done_items: Vec<Base>,
     pub pending_item_count: i8,
-    pub donr_item_count: i8,
+    pub done_item_count: i8,
 }
 
 impl ToDoItems {
@@ -38,7 +38,7 @@ impl ToDoItems {
             pending_items: pending_arraw_buffer,
             done_items: done_arraw_buffer,
             pending_item_count: pending_count,
-            donr_item_count: done_count,
+            done_item_count: done_count,
         }
     }
 }
