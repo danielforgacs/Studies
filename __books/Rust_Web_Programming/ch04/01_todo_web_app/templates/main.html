@@ -6,14 +6,22 @@
         <meta httpEquiv="X-UA-Compatible" content="ie=edge"/>
         <meta name="description" content="This is a simpleto do app"/>
         <title>To Do App</title>
+        <style>
+            {{BASE_CSS}}
+            {{CSS}}
+        </style>
     </head>
     <body>
-        <h1>done items</h1>
-        <div id="doneItems"></div>
-        <h1>to do items</h1>
-        <div id="pendingItems"></div>
-        <input type="text" id="name" placeholder="create to do item">
-        <button id="create-button" value="send">create</button>
+        <div class="mainContainer">
+            <h1>done items</h1>
+            <div id="doneItems"></div>
+            <h1>to do items</h1>
+            <div id="pendingItems"></div>
+            <div class="inputContainer">
+                <input type="text" id="name" placeholder="create to do item">
+                <button id="create-button" value="send">create</button>
+            </div>
+        </div>
     </body>
     <script>
 {{JAVASCRIPT}}
