@@ -2,12 +2,12 @@ version: '3.7'
 
 services:
 
-  postgres:
-    container_name: 'todo_postgres'
+  postgres_service:
+    container_name: 'todo_pg_container'
     image: 'postgres:15.2'
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=letmein
-      -  PGUSER=username
-    #   - POSTGRES_DB=todo
+      - POSTGRES_USER=todo_user
+      - POSTGRES_PASSWORD=todo_password
+      - POSTGRES_DB=todo_db
