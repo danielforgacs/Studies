@@ -1,3 +1,3 @@
 mod base;
-mod done;
-mod pending;
+pub mod done;
+pub mod pending;
