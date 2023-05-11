@@ -1,15 +1,15 @@
 use std::fmt::{Display, Formatter, Result};
 
 pub enum TaskStatus {
-    Done,
-    Pending,
+    DONE,
+    PENDING,
 }
 
 impl TaskStatus {
     pub fn stringify(&self) -> String {
         match &self {
-            &Self::Done => {"DONE".to_string()},
-            &Self::Pending => {"PENDING".to_string()}
+            &Self::DONE => {"DONE".to_string()},
+            &Self::PENDING => {"PENDING".to_string()}
         }
     }
 }
@@ -17,8 +17,8 @@ impl TaskStatus {
 impl Display for TaskStatus {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         match &self {
-            Self::Done => write!(f, "Done"),
-            Self::Pending => write!(f, "Pending"),
+            Self::DONE => write!(f, "Done"),
+            Self::PENDING => write!(f, "Pending"),
         }
     }
 }
