@@ -13,5 +13,5 @@ fn action_two(_n: u8) -> Result<u8> {
 }
 
 fn action_three(_n: u8) -> Result<()> {
-    Ok(())
+    Err(Error::new(ErrorKind::Other, "Shit this!"))
 }
