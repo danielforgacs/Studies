@@ -5,15 +5,22 @@ fn main() {
 }
 
 fn action_one() -> Result<u8> {
+    println!("action_one");
+    let problem: Result<()> = Err(Error::new(ErrorKind::Other, "Error ONE!"));
+    problem.map_err(|e| {dbg!(e)}).ok();
     Ok(1)
 }
 
 fn action_two(_n: u8) -> Result<u8> {
+    println!("action_two");
+    let problem: Result<()> = Err(Error::new(ErrorKind::Other, "Error TWO!"));
+    problem.map_err(|e| {dbg!(e)}).ok();
     Ok(2)
 }
 
 fn action_three(_n: u8) -> Result<()> {
-    let problem: Result<()> = Err(Error::new(ErrorKind::Other, "Error three!"));
-    problem.map_err(|e| {dbg!(e)})?;
+    println!("action_three");
+    let problem: Result<()> = Err(Error::new(ErrorKind::Other, "Error THREE!"));
+    problem.map_err(|e| {dbg!(e)}).ok();
     Ok(())
 }
