@@ -13,5 +13,7 @@ fn action_two(_n: u8) -> Result<u8> {
 }
 
 fn action_three(_n: u8) -> Result<()> {
-    Err(Error::new(ErrorKind::Other, "Shit this!"))
+    let problem: Result<()> = Err(Error::new(ErrorKind::Other, "Error three!"));
+    let o = problem.map_err(|e| {dbg!(e)});
+    Ok(())
 }
