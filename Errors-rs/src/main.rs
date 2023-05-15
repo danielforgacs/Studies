@@ -1,3 +1,9 @@
+use std::io::{Error, Result, ErrorKind};
+
 fn main() {
-    println!("Hello, world!");
+    action_one();
+}
+
+fn action_one() -> Result<()> {
+    Ok(())
 }
