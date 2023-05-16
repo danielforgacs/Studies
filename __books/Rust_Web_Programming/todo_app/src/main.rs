@@ -14,19 +14,6 @@ use serde_json::{Map, json};
 
 fn main() {
     {
-        let to_do_item = to_do_factory("washing", TaskStatus::DONE);
-        match to_do_item {
-            ItemTypes::Done(item) => {
-                item.get(&item.super_struct.title);
-                item.delete(&item.super_struct.title);
-            },
-            ItemTypes::Pending(item) => {
-                item.get(&item.super_struct.title);
-                item.set_to_done(&item.super_struct.title);
-            }
-        }
-    }
-    {
         let args: Vec<String> = env::args().collect();
         let status: &String = &args[1];
         let title: &String = &args[2];
