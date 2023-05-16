@@ -2,5 +2,8 @@
 __books/Rust_Web_Programming/Rust-Web-Programming-material/
 __books/Rust_Web_Programming/Rust-Web-Programming-2nd-Edition/
 
+# Rust-Web-Programming book
+__books/Rust_Web_Programming/todo_app/state.json
+
 # all Rust target dirs
 target/
