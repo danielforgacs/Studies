@@ -8,7 +8,7 @@ use super::to_do::traits::create::Create;
 use super::to_do::traits::delete::Delete;
 use super::to_do::traits::edit::Edit;
 
-fn process_pending(item: Pending, command: String, state: &Map<String, Value>) {
+pub fn process_pending(item: Pending, command: String, state: &Map<String, Value>) {
     let mut state = state.clone();
     match command.as_str() {
         "get" => item.get(&item.super_struct.title, &state),
@@ -18,7 +18,7 @@ fn process_pending(item: Pending, command: String, state: &Map<String, Value>) {
     }
 }
 
-fn process_done(item: Done, command: String, state: &Map<String, Value>) {
+pub fn process_done(item: Done, command: String, state: &Map<String, Value>) {
     let mut state = state.clone();
     match command.as_str() {
         "get" => item.get(&item.super_struct.title, &state),
