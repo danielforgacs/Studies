@@ -1,10 +1,10 @@
 /*
-mod to_do;
-mod state;
+>>> mod to_do;
+>>> mod state;
 mod processes;
 
 use to_do::to_do_factory;
-use to_do::enums::TaskStatus;
+>>> use to_do::enums::TaskStatus;
 use to_do::ItemTypes;
 use to_do::traits::get::Get;
 use to_do::traits::delete::Delete;
@@ -33,8 +33,11 @@ fn main() {
 }
 */
 
+mod to_do;
+mod state;
 mod views;
 
+use to_do::enums::TaskStatus;
 use actix_web::{App, HttpServer};
 
 #[actix_web::main]
