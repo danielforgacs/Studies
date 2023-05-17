@@ -19,6 +19,9 @@ fn main() {
         let command: &String = &args[1];
         let title: &String = &args[2];
         let mut state = read_file("./state.json");
+        // This gets the status of the todo item
+        // if it exists in the state. If it
+        // doesn't, the status defaults to "pending"
         let status = match state.get(title) {
             Some(result) => result.to_string().replace('\n', ""),
             None => "pending".to_string(),
