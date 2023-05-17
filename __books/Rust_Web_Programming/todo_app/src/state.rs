@@ -20,9 +20,9 @@ pub fn read_file(file_name: &str) -> Map<String, Value> {
 }
 
 pub fn write_to_file(file_name: &str, state: &mut Map<String, Value>) {
-    let new_data = json!(state);
+    let new_data = serde_json::to_string_pretty(state).unwrap();
     fs::write(
         file_name.to_string(),
-        new_data.to_string()
+        new_data
     ).expect("Unable to write file");
 }
