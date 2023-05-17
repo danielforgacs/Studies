@@ -22,3 +22,12 @@ impl Display for TaskStatus {
         }
     }
 }
+
+impl From<String> for TaskStatus {
+    fn from(value: String) -> Self {
+        match value.as_str() {
+            "pending" => Self::PENDING,
+            _ => Self::DONE,
+        }
+    }
+}

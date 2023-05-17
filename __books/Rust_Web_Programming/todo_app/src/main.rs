@@ -16,10 +16,14 @@ use serde_json::{Map, json};
 fn main() {
     {
         let args: Vec<String> = env::args().collect();
-        let status: &String = &args[1];
+        let command: &String = &args[1];
         let title: &String = &args[2];
-        let item = to_do_factory(title, TaskStatus::PENDING);
         let mut state = read_file("./state.json");
-        processes::process_input(item, "create".to_string(), &mut state);
+        let status = match state.get(title) {
+            Some(result) => result.to_string().replace('\n', ""),
+            None => "pending".to_string(),
+        };
+        let item = to_do_factory(title, status.into());
+        processes::process_input(item, command.into(), &mut state);
     }
 }
