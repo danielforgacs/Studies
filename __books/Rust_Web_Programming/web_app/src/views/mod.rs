@@ -1,4 +1,5 @@
 mod auth;
+mod to_do;
 
 use actix_web::web::{ServiceConfig};
 use auth::auth_views_factory;
