@@ -2,4 +2,4 @@ GET http://localhost:8080/v1/auth/login
 
 ###
 
-GET http://localhost:8080/v1/item/create/1st_item
+POST http://localhost:8080/v1/item/create/1st_item
