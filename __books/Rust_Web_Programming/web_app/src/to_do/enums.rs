@@ -18,17 +18,21 @@ pub enum TaskStatus {
 impl Display for TaskStatus {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         match &self {
-            Self::DONE => write!(f, "Done"),
-            Self::PENDING => write!(f, "Pending"),
+            Self::DONE => write!(f, "DONE"),
+            Self::PENDING => write!(f, "PENDING"),
         }
     }
 }
 
 impl From<String> for TaskStatus {
     fn from(value: String) -> Self {
+        let value_raw = value.clone();
         match value.as_str() {
-            "pending" => Self::PENDING,
-            _ => Self::DONE,
+            "PENDING" => Self::PENDING,
+            "DONE" => Self::DONE,
+            _ => {
+                panic!("UNSUPPORTED TaskStatus STRING: >>>{:?}<<<, {:?}", value_raw, value_raw.chars());
+            },
         }
     }
 }
