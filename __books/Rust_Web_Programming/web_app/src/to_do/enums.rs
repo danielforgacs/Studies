@@ -1,4 +1,5 @@
 use std::fmt::{Display, Formatter, Result};
+use serde::{Serialize};
 
 pub enum TaskStatus {
     DONE,
@@ -29,5 +30,13 @@ impl From<String> for TaskStatus {
             "pending" => Self::PENDING,
             _ => Self::DONE,
         }
+    }
+}
+
+impl Serialize for TaskStatus {
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+        where
+            S: serde::Serializer {
+        Ok(serializer.serialize_str(self.to_string().as_str())?)
     }
 }
