@@ -1,9 +1,4 @@
 use actix_web::Responder;
-use actix_web::web::Json;
-use serde_json::{Map, Value};
-use crate::state::read_file;
-use crate::TaskStatus;
-use crate::to_do::to_do_factory;
 use crate::json_serialization::to_do_items::TodoItems;
 
 // pub async fn get() -> impl Responder {

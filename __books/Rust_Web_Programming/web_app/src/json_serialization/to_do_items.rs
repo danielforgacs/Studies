@@ -6,7 +6,6 @@ use crate::state::read_file;
 use crate::to_do::to_do_factory;
 use actix_web::Responder;
 use actix_web::HttpResponse;
-use actix_web::web::Json;
 use actix_web::body::BoxBody;
 use actix_web::http::header::ContentType;
 
@@ -62,7 +61,7 @@ impl TodoItems {
 impl Responder for TodoItems {
     type Body = BoxBody;
 
-    fn respond_to(self, req: &actix_web::HttpRequest) -> actix_web::HttpResponse<Self::Body> {
+    fn respond_to(self, _req: &actix_web::HttpRequest) -> actix_web::HttpResponse<Self::Body> {
         let body = serde_json::to_string_pretty(&self).expect("CAN NOT PRETTU SERIALISE ToDoItems");
         HttpResponse::Ok()
         .content_type(ContentType::json())
