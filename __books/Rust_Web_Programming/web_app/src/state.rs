@@ -4,10 +4,9 @@ use std::io::Read;
 use std::io::Write;
 use serde_json::Map;
 use serde_json::value::Value;
-use serde_json::json;
 
 pub fn read_file(file_name: &str) -> Map<String, Value> {
-    let mut file = File::open(file_name.to_string()).unwrap_or_else(|err| {
+    let mut file = File::open(file_name.to_string()).unwrap_or_else(|_err| {
         let mut file = File::create(file_name).unwrap();
         file.write_all(b"{\n}").unwrap();
         File::open(file_name.to_string()).unwrap()
