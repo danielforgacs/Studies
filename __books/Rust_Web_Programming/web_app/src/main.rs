@@ -37,6 +37,7 @@ mod to_do;
 mod state;
 mod views;
 mod processes;
+mod json_serialization;
 
 use to_do::enums::TaskStatus;
 use actix_web::{App, HttpServer};
