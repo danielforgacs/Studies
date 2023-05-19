@@ -2,6 +2,13 @@ use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
 use crate::to_do::enums::TaskStatus;
 use serde::Serialize;
+use crate::state::read_file;
+use crate::to_do::to_do_factory;
+use actix_web::Responder;
+use actix_web::HttpResponse;
+use actix_web::web::Json;
+use actix_web::body::BoxBody;
+use actix_web::http::header::ContentType;
 
 #[derive(Serialize)]
 pub struct TodoItems {
@@ -38,5 +45,27 @@ impl TodoItems {
             pending_count,
             done_count,
         }
+    }
+
+    pub fn get_state() -> Self {
+        let state = read_file("./state.json");
+        let mut array_buf = Vec::new();
+        for (title, value) in state {
+            let status = TaskStatus::from(value.to_string().replace('\"', ""));
+            let item = to_do_factory(title.as_ref(), status);
+            array_buf.push(item);
+        }
+        Self::new(array_buf)
+    }
+}
+
+impl Responder for TodoItems {
+    type Body = BoxBody;
+
+    fn respond_to(self, req: &actix_web::HttpRequest) -> actix_web::HttpResponse<Self::Body> {
+        let body = serde_json::to_string_pretty(&self).expect("CAN NOT PRETTU SERIALISE ToDoItems");
+        HttpResponse::Ok()
+        .content_type(ContentType::json())
+        .body(body)
     }
 }
