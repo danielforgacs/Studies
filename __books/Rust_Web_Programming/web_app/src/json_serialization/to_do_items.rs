@@ -10,7 +10,7 @@ use actix_web::body::BoxBody;
 use actix_web::http::header::ContentType;
 
 #[derive(Serialize)]
-pub struct TodoItems {
+pub struct ToDoItems {
     pub pending_items: Vec<Base>,
     pub done_items: Vec<Base>,
     pub pending_count: i8,
@@ -25,7 +25,7 @@ pub struct TodoItems {
 //     }
 // }
 
-impl TodoItems {
+impl ToDoItems {
     pub fn new(input_items: Vec<ItemTypes>) -> Self {
         let mut pending_items = vec![];
         let mut done_items = vec![];
@@ -58,7 +58,7 @@ impl TodoItems {
     }
 }
 
-impl Responder for TodoItems {
+impl Responder for ToDoItems {
     type Body = BoxBody;
 
     fn respond_to(self, _req: &actix_web::HttpRequest) -> actix_web::HttpResponse<Self::Body> {
