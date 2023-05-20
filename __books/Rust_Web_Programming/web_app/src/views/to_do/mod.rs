@@ -2,7 +2,7 @@ mod create;
 mod get;
 mod edit;
 
-use actix_web::web::{ServiceConfig, get, post, put, scope};
+use actix_web::web::{ServiceConfig, get, post, scope};
 
 pub fn to_do_views_factory(app: &mut ServiceConfig) {
     app.service(

@@ -1,6 +1,5 @@
 use actix_web::{web, HttpResponse};
-use serde_json::value::Value;
-use serde_json::Map;
+
 use crate::state::read_file;
 use crate::to_do::{to_do_factory, enums::TaskStatus};
 use crate::json_serialization::{to_do_item::ToDoItem, to_do_items::ToDoItems};
