@@ -1,5 +1,5 @@
 use actix_web::Responder;
-use crate::json_serialization::to_do_items::TodoItems;
+use crate::json_serialization::to_do_items::ToDoItems;
 
 // pub async fn get() -> impl Responder {
 //     let state: Map<String, Value> = read_file("./state.json");
@@ -13,5 +13,5 @@ use crate::json_serialization::to_do_items::TodoItems;
 // }
 
 pub async fn get() -> impl Responder {
-    TodoItems::get_state()
+    ToDoItems::get_state()
 }

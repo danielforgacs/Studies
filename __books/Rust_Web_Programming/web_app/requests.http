@@ -7,3 +7,13 @@ GET http://localhost:8080/v1/item/get
 ###
 
 POST http://localhost:8080/v1/item/create/1st_item
+
+###
+
+POST http://localhost:8080/v1/item/edit
+content-type: application/json
+
+{
+    "title": "edit",
+    "status": "DONE"
+}

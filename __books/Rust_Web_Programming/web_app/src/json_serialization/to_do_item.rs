@@ -1,7 +1,7 @@
 use serde::Deserialize;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct ToDoItem {
-    title: String,
-    status: String,
+    pub title: String,
+    pub status: String,
 }
