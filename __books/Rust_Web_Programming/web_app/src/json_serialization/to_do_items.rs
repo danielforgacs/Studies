@@ -17,14 +17,6 @@ pub struct ToDoItems {
     pub done_count: i8,
 }
 
-// impl Serialize for TodoItems {
-//     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-//         where
-//             S: serde::Serializer {
-
-//     }
-// }
-
 impl ToDoItems {
     pub fn new(input_items: Vec<ItemTypes>) -> Self {
         let mut pending_items = vec![];
