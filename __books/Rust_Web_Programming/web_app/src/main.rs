@@ -3,6 +3,7 @@ mod state;
 mod views;
 mod processes;
 mod json_serialization;
+mod jwt;
 
 use to_do::enums::TaskStatus;
 use actix_web::{App, HttpServer};
