@@ -7,6 +7,10 @@ pub struct JWToken {
     pub message: String,
 }
 
+// This is the extractor for the token. this is used
+// when an arument is added to a view.
+// This doesn't seem to have anything to do with
+// middleware that the app().wrap_fn() config does.
 impl FromRequest for JWToken {
     type Error = Error;
     type Future = Ready<Result<JWToken, Error>>;

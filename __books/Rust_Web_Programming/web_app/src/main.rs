@@ -13,14 +13,14 @@ use actix_service::Service;
 async fn main() -> std::io::Result<()> {
     HttpServer::new( ||
         App::new()
-            .wrap_fn(|req, srv| {
-                println!("request: {:?}", req);
-                let future = srv.call(req);
-                async {
-                    let result = future.await?;
-                    Ok(result)
-                }
-            })
+            // .wrap_fn(|req, srv| {
+            //     println!("request: {:?}", req);
+            //     let future = srv.call(req);
+            //     async {
+            //         let result = future.await?;
+            //         Ok(result)
+            //     }
+            // })
             .configure(views::views_factory)
     )
     .bind(("0.0.0.0", 8080)).map_err(|err| {
