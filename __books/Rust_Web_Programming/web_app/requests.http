@@ -12,6 +12,7 @@ POST http://localhost:8080/v1/item/create/1st_item
 
 POST http://localhost:8080/v1/item/edit
 content-type: application/json
+token: This some good old Json Web Token!
 
 {
     "title": "edit",
