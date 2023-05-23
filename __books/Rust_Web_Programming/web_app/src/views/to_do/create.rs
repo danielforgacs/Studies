@@ -1,4 +1,5 @@
 use actix_web::{HttpRequest, HttpResponse};
+use actix_web::http::header;
 use serde_json::{Map, Value};
 use crate::state::read_file;
 use crate::to_do::to_do_factory;
@@ -12,5 +13,6 @@ pub async fn create(req: HttpRequest) -> HttpResponse {
     let item = to_do_factory(&title, TaskStatus::PENDING);
     process_input(item, "create".to_string(), &state);
     HttpResponse::Ok()
+        .append_header(("content-type", "application/json"))
         .json(ToDoItems::get_state())
 }
