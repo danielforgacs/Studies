@@ -16,7 +16,7 @@ impl FromRequest for JWToken {
     type Future = Ready<Result<JWToken, Error>>;
 
     fn from_request(req: &HttpRequest, _: &mut Payload) -> Self::Future {
-        match req.headers().get("token") {
+        match req.headers().get("user-token") {
             Some(data) => {
                 let jwtoken = JWToken {
                     message: data.to_str().unwrap().to_string(),
