@@ -25,15 +25,62 @@
 // export default App;
 
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class App extends Component {
   state = {
-    "message": "To Do"
+    "pending_items": [],
+    "done_items": [],
+    "pending_count": 0,
+    "done_count": 0,
   }
+
+  getItems() {
+    axios.get(
+      "http://localhost:8080/v1/item/get",
+      {
+        headers: {
+          "token": "Axios Token"
+        }
+      }
+    )
+    .then(response => {
+      let pending_items = response.data["pending_items"]
+      let done_items = response.data["done_items"]
+      let pending_count = response.data["pending_count"]
+      let done_count = response.data["done_count"]
+      this.setState({
+        "pending_items": this.processItemValues(pending_items),
+        "done_items": this.processItemValues(done_items),
+        "pending_count": this.processItemValues(pending_count),
+        "done_count": this.processItemValues(done_count),
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.getItems()
+  }
+
+  processItemValues(items) {
+    let itemList = []
+    items.forEach((item, index) => {
+      itemList.push(
+        <li key={index}>{item.title} {item.status}</li>
+      )
+    });
+    return itemList
+  }
+
   render() {
     return (
       <div className='App'>
-        <p>{this.state.message} Application</p>
+        <h1>Done Items</h1>
+        <p>done item count: {this.state.done_count}</p>
+        {this.state.done_items}
+        <h1>Pending Items</h1>
+        <p>pending item count: {this.state.pending_count}</p>
+        {this.state.pending_items}
       </div>
     )
   }
