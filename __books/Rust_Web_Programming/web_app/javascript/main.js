@@ -1,7 +1,10 @@
 function renderItems(items, processType, elementId, processFunction) {
+    console.log('--> Render items:', items)
+    console.log('--> Render items length:', items.length)
     let itemsMeta = []
     let placeholder = "<div>"
-    for (let i = 0; i < items.lenth; i++) {
+    for (let i = 0; i < items.length; i++) {
+        console.log('--> item idx:', i)
         let title = items[i]['title']
         let placeholderId = processType + '-' + title.replaceAll(' ', '-')
         placeholder += '<div>' + title + '<button id="' + placeholderId + '">' + processType + '</button></div>'
@@ -10,6 +13,7 @@ function renderItems(items, processType, elementId, processFunction) {
     placeholder += "</div>"
     document.getElementById(elementId).innerHTML = placeholder
     for (let i = 0; i < itemsMeta.length; i++) {
+        console.log('--> meta length:', itemsMeta.length)
         document.getElementById(itemsMeta[i]['id']).addEventListener('click', processFunction)
     }
 }
@@ -18,8 +22,8 @@ function apiCall(url, method) {
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true
     xhr.addEventListener('readystatechange', function() {
-        console.log('--> this.responseText:', this.responseText)
         if (this.readyState === this.DONE) {
+            console.log('--> this.responseText:', this.responseText)
             renderItems(
                 JSON.parse(this.responseText)['pending_items'],
                 'edit',
@@ -59,17 +63,20 @@ function getItems() {
     call.send()
 }
 
+getItems()
+
 function createItem() {
     let title = document.getElementById('name')    
-    let call = apiCall('/v1/item/create', 'POST')
-    let json = {
-        'title': title,
-        'status': 'PENDING'
-    }
-    call.send(JSON.stringify(json))
+    console.log('--> create title:', title)
+    let call = apiCall('v1/item/create/' + title.value , 'POST')
+    // let json = {
+    //     'title': title,
+    //     'status': 'PENDING'
+    // }
+    // call.send(JSON.stringify(json))
+    call.send()
     document.getElementById('name').value = null
 }
 
-getItems()
 
 document.getElementById('create-button').addEventListener('click', createItem)
