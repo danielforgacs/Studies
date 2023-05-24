@@ -6,19 +6,15 @@
         <meta httpEquiv="X-UA-Compatible" content="ie=edge"/>
         <meta name="description" content="This is a simple to do app"/>
         <title>To Do App</title>
-        <style>
-            /* BASE_CSS */
-            /* BASE_CSS - END */
-            {{BASE_CSS}}
-            /* BASE_CSS - END */
-
-            /* CSS */
-            {{CSS}}
-            /* CSS - END */
-        </style>
     </head>
+    <style>
+        {{BASE_CSS}}
+        {{CSS}}
+        HEADER_CSS
+    </style>
     <body>
         <div class="mainContainer">
+            HEADER_HTML
             <h1>Done Items</h1>
             <div id="doneItems"></div>
 
