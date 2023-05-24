@@ -24,12 +24,8 @@ function apiCall(url, method) {
     xhr.addEventListener('readystatechange', function() {
         if (this.readyState === this.DONE) {
             console.log('--> this.responseText:', this.responseText)
-            renderItems(
-                JSON.parse(this.responseText)['pending_items'],
-                'edit',
-                'pendingItems',
-                editItem,
-            )
+            renderItems(JSON.parse(this.responseText)['pending_items'], 'edit', 'pendingItems', editItem)
+            renderItems(JSON.parse(this.responseText)['done_items'], 'delete', 'doneItems', deleteItem)
         }
     })
     xhr.open(method, url)
@@ -49,7 +45,7 @@ function editItem() {
 }
 
 function deleteItem() {
-    let title = this.id.replaceAll('-', ' ').replace('delete', '')
+    let title = this.id.replaceAll('-', '').replace('delete', '')
     let call = apiCall('/v1/item/delete', 'POST')
     let json = {
         'title': title,
