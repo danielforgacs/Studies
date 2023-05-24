@@ -39,7 +39,7 @@ function apiCall(url, method) {
 }
 
 function editItem() {
-    let title = this.id.replaceAll('-', ' ').replace('edit', '')
+    let title = this.id.replaceAll('-', '').replace('edit', '')
     let call = apiCall('/v1/item/edit', 'POST')
     let json = {
         'title': title,
