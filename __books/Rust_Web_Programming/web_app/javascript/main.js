@@ -7,7 +7,7 @@ function renderItems(items, processType, elementId, processFunction) {
         console.log('--> item idx:', i)
         let title = items[i]['title']
         let placeholderId = processType + '-' + title.replaceAll(' ', '-')
-        placeholder += '<div>' + title + '<button id="' + placeholderId + '">' + processType + '</button></div>'
+        placeholder += '<div class="itemContainer">' + title + '<button id="' + placeholderId + '">' + processType + '</button></div>'
         itemsMeta.push({'id': placeholderId, 'title': title})
     }
     placeholder += "</div>"
@@ -65,14 +65,8 @@ function createItem() {
     let title = document.getElementById('name')    
     console.log('--> create title:', title)
     let call = apiCall('v1/item/create/' + title.value , 'POST')
-    // let json = {
-    //     'title': title,
-    //     'status': 'PENDING'
-    // }
-    // call.send(JSON.stringify(json))
     call.send()
     document.getElementById('name').value = null
 }
-
 
 document.getElementById('create-button').addEventListener('click', createItem)
