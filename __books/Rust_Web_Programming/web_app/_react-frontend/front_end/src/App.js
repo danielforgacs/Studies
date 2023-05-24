@@ -52,8 +52,8 @@ class App extends Component {
       this.setState({
         "pending_items": this.processItemValues(pending_items),
         "done_items": this.processItemValues(done_items),
-        "pending_count": this.processItemValues(pending_count),
-        "done_count": this.processItemValues(done_count),
+        "pending_count": pending_count,
+        "done_count": done_count,
       })
     })
   }
@@ -63,7 +63,13 @@ class App extends Component {
   }
 
   processItemValues(items) {
+    console.log('--> line 66, items', items)
     let itemList = []
+    // items.forEach((a, b) => {
+
+    // }
+
+    // )
     items.forEach((item, index) => {
       itemList.push(
         <li key={index}>{item.title} {item.status}</li>
