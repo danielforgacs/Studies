@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   getItems() {
-      axios.get("http://127.0.0.1:8000/v1/item/get",
+      axios.get("http://127.0.0.1:8080/v1/item/get",
           {headers: {"token": "some_token"}})
           .then(response => {
 
