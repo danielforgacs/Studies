@@ -37,7 +37,7 @@ class App extends Component {
 
   getItems() {
     axios.get(
-      "http://localhost:8080/v1/item/get",
+      "http://127.0.0.1:8080/v1/item/get",
       {
         headers: {
           "token": "Axios Token"
