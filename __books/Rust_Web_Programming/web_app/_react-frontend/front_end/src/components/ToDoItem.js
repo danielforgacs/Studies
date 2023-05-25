@@ -43,7 +43,7 @@ class ToDoItem extends Component {
     render() {
         return(
             <div>
-                <p>{this.state.title</p>
+                <p>{this.state.title}</p>
                 <button onClick={this.sendRequest}>{this.state.button}</button>
             </div>
         )
