@@ -37,3 +37,5 @@ class CreateToDoItem extends Component {
         )
     }
 }
+
+export default CreateToDoItem

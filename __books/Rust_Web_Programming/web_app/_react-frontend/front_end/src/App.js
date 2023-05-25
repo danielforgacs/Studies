@@ -27,6 +27,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import ToDoItem from './components/ToDoItem';
+import CreateToDoItem from './components/CreateToDoItem';
+
 class App extends Component {
   state = {
     "pending_items": [],
@@ -63,30 +66,41 @@ class App extends Component {
   }
 
   processItemValues(items) {
-    console.log('--> line 66, items', items)
     let itemList = []
-    // items.forEach((a, b) => {
-
-    // }
-
-    // )
-    items.forEach((item, index) => {
+    items.forEach((item, _) => {
       itemList.push(
-        <li key={index}>{item.title} {item.status}</li>
+        <ToDoItem key={item.title + item.status}
+                  title={item.title}
+                  status={item.status.status}
+                  passBackResponse={this.handleReturnState}/>
       )
-    });
+    })
     return itemList
+  }
+
+  handleReturnedState = (response) => {
+      let pending_items = response.data["pending_items"]
+      let done_items = response.data["done_items"]
+      this.setState({
+          "pending_items": 
+           this.processItemValues(pending_items),
+          "done_items": this.processItemValues(done_items),
+          "pending_count": 
+           response.data["pending_count"],
+          "done_count": response.data["done_count"]
+      })
   }
 
   render() {
     return (
       <div className='App'>
-        <h1>Done Items</h1>
-        <p>done item count: {this.state.done_count}</p>
-        {this.state.done_items}
         <h1>Pending Items</h1>
         <p>pending item count: {this.state.pending_count}</p>
         {this.state.pending_items}
+
+        <h1>Done Items</h1>
+        <p>done item count: {this.state.done_count}</p>
+        {this.state.done_items}
       </div>
     )
   }
