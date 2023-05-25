@@ -1,11 +1,14 @@
-import React, {Component } from "react";
+import React, { Component } from 'react';
 import axios from "axios";
+import "../App.css";
+
 
 class ToDoItem extends Component {
+
     state = {
         "title": this.props.title,
         "status": this.props.status,
-        "button": this.props.processStatus(this.props.status),
+        "button": this.processStatus(this.props.status)
     }
 
     processStatus(status) {
@@ -15,7 +18,7 @@ class ToDoItem extends Component {
             return "delete"
         }
     }
-    
+
     inverseStatus(status) {
         if (status === "PENDING") {
             return "DONE"
@@ -25,29 +28,26 @@ class ToDoItem extends Component {
     }
 
     sendRequest = () => {
-        axios.post("http://127.0.0.1:8080/v1/item/"+this.state.button,
+        axios.post("http://127.0.0.1:8000/v1/item/" + this.state.button,
             {
                 "title": this.state.title,
-                "status": this.state.status,
+                "status": this.inverseStatus(this.state.status)
             },
-            {
-                "headers": {
-                    "user-token": "React ToDoItem token"
-                }
-        })
-        .then(response => {
-            this.props.passBackResponse(response)
-        })
+        {headers: {"token": "some_token"}})
+            .then(response => {
+
+                this.props.passBackResponse(response);
+            });
     }
 
     render() {
         return(
-            <div>
+            <div className="itemContainer">
                 <p>{this.state.title}</p>
-                <button onClick={this.sendRequest}>{this.state.button}</button>
+                <div className="actionButton" onClick={this.sendRequest}>{this.state.button}</div>
             </div>
         )
     }
 }
 
-export default ToDoItem
+export default ToDoItem;
