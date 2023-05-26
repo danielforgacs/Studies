@@ -25,8 +25,8 @@ class App extends Component {
               this.setState({
                     "pending_items": this.processItemValues(pending_items),
                     "done_items": this.processItemValues(done_items),
-                    "pending_items_count": response.data["pending_item_count"],
-                    "done_items_count": response.data["done_item_count"]
+                    "pending_items_count": response.data["pending_count"],
+                    "done_items_count": response.data["done_count"]
                 })
           });
   }
