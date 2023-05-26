@@ -2,6 +2,13 @@
   "name": "react_fron_end",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
+  "main": "public/electron.js",
+  "description": "GUI Desktop all for simple to do app - from react.",
+  "author": "me",
+  "build": {
+    "appId": "meapp"
+  },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
     "@testing-library/jest-dom": "^5.16.5",
