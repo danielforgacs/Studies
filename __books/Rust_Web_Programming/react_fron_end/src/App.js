@@ -16,7 +16,7 @@ class App extends Component {
 
   getItems() {
       axios.get("http://127.0.0.1:8080/v1/item/get",
-          {headers: {"token": "some_token"}})
+          {headers: {"user-token": "some_token"}})
           .then(response => {
 
               let pending_items = response.data["pending_items"]
