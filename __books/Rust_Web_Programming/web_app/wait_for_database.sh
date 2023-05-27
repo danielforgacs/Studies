@@ -2,7 +2,12 @@
 # cd ..
 
 docker-compose up -d
-until pg_isready -h localhost -p 5432 -U username
+
+# pg_ready is not installed:
+# until pg_isready -h localhost -p 5432 -U username
+
+# alternative solution for pg_ready:
+until docker run -it postgres --add-host host.docker.internal:host-gateway docker.io/postgres:14-alpine -h localhost -U username pg_isready
 do
   echo "Waiting for postgres"
   sleep 2;
