@@ -5,6 +5,8 @@ mod processes;
 mod json_serialization;
 mod jwt;
 mod database;
+mod schema;
+mod models;
 
 use to_do::enums::TaskStatus;
 use actix_web::{App, HttpServer};
