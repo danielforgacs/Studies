@@ -8,6 +8,10 @@ use actix_web::Responder;
 use actix_web::HttpResponse;
 use actix_web::body::BoxBody;
 use actix_web::http::header::ContentType;
+use diesel::prelude::*;
+use crate::database::establish_connection;
+use crate::models::item::item::Item;
+use crate::schema::to_do;
 
 #[derive(Serialize)]
 pub struct ToDoItems {
@@ -38,7 +42,8 @@ impl ToDoItems {
         }
     }
 
-    pub fn get_state() -> Self {
+    pub fn get_state_w_file() -> Self {
+        // Old way with file based db.
         let state = read_file("./state.json");
         let mut array_buf = Vec::new();
         for (title, value) in state {
@@ -47,6 +52,20 @@ impl ToDoItems {
             array_buf.push(item);
         }
         Self::new(array_buf)
+    }
+
+    pub fn get_state() -> Self {
+        let mut connection = establish_connection();
+        let mut array_buffer = Vec::new();
+        let items = to_do::table
+            .order(to_do::columns::id.asc())
+            .load::<Item>(&mut connection).unwrap();
+        for item in items {
+            let status = TaskStatus::from(item.status.to_string());
+            let item = to_do_factory(&item.title, status);
+            array_buffer.push(item);
+        }
+        Self::new(array_buffer)
     }
 }
 
