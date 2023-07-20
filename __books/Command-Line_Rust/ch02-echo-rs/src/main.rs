@@ -1,8 +1,7 @@
-use std::env::args;
+use clap::Command;
 
 fn main() {
-    let result = args()
-    .map(|mut i| {i.push(' '); i})
-    .collect::<Vec<String>>();
-    println!("{:?}", result);
+    let clargs = Command::new(std::env!("CARGO_PKG_NAME"))
+    .get_matches();
+    dbg!(&clargs);
 }
