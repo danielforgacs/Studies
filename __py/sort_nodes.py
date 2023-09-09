@@ -30,6 +30,29 @@ root.children = [
     node25,
 ]
 
+BAD_SORT_NODES = [
+    root,
+            node33,
+            node32,
+            node31,
+        node25,
+        node24,
+        node23,
+        node22,
+        node21,
+]
+EXPECTED = [
+            node31,
+            node32,
+            node33,
+        node21,
+        node22,
+        node23,
+        node24,
+        node25,
+    root,
+]
+
 def print_kids(node):
     indent = 0
     def pr(node, indent):
