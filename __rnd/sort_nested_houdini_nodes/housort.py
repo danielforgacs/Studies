@@ -57,11 +57,11 @@ def sort_kids(node):
         if not input:
             return
         input = input[0]
-        allnodes.append(input)
+        if input not in allnodes:
+            allnodes.append(input)
         link_inputs(input, allnodes, level)
     link_inputs(get_out(node), allnodes, level)
     for kid in allnodes:
         if kid.isNetwork():
-            # sort_kids(kid)
             link_inputs(get_out(kid), allnodes, level+1)
     return list(reversed(allnodes))
