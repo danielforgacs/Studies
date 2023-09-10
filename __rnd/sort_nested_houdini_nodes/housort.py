@@ -44,17 +44,23 @@ def list_children(root):
 
 def main():
     root = hou.node('/obj/geo1/root')
-    sort_kids(root)
-
+    kids = sort_kids(root)
+    for kid in kids:
+        print(f'{kid}')
 
 def sort_kids(node):
     get_out = lambda x: hou.node(f'{x.path()}/output0')
     allnodes = []
     level = 0
     def link_inputs(node, allnodes, level):
-        level += 1
-        for node in node.inputs():
-            print('\t'*level, f'{node}')
-            allnodes.append(node)
-            link_inputs(node, allnodes, level)
+        input = node.inputs()
+        if not input:
+            return
+        input = input[0]
+        allnodes.append(input)
+        link_inputs(input, allnodes, level)
     link_inputs(get_out(node), allnodes, level)
+    for kid in allnodes:
+        if kid.isNetwork():
+            sort_kids(kid)
+    return list(reversed(allnodes))
