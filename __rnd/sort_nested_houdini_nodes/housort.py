@@ -62,5 +62,6 @@ def sort_kids(node):
     link_inputs(get_out(node), allnodes, level)
     for kid in allnodes:
         if kid.isNetwork():
-            sort_kids(kid)
+            # sort_kids(kid)
+            link_inputs(get_out(kid), allnodes, level+1)
     return list(reversed(allnodes))
