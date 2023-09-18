@@ -33,7 +33,7 @@ impl GroupThem for &str {}
 impl GroupThem for String {}
 
 impl Debug for dyn GroupThem {
-    fn fmt(&self, _: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
-        todo!()
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+        write!(f, "...")
     }
 }
