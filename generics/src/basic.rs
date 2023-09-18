@@ -7,6 +7,6 @@ pub fn run_basic() {
 }
 
 
-fn do_something_w_a_number<T>(num: T) {
+fn do_something_w_a_number<T>(_num: T) {
     println!("running basic.");
 }
