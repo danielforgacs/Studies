@@ -1,11 +1,5 @@
 trait PixelValue {}
 
-impl std::fmt::Display for dyn PixelValue {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self)
-    }
-}
-
 impl PixelValue for u8 {}
 impl PixelValue for f32 {}
 
@@ -24,8 +18,8 @@ pub fn generic_struct_two() {
     let exr = Exr { channels: vec![red, green] };
 
     for chan in exr.channels {
-        for value in chan.values {
-            print!("{}", value);
+        for _value in chan.values {
+            // print!("{}", value);
         }
     }
 }
