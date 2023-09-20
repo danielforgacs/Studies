@@ -6,6 +6,7 @@ mod generic_struct_two;
 mod generic_struct_three;
 mod generic_struct_four;
 mod generic_nested_structs;
+mod generic_nested_structs_two;
 
 fn main() {
     basic::run_basic();
@@ -17,4 +18,5 @@ fn main() {
     generic_struct_three::generic_struct_three();
     generic_struct_four::generic_struct_four();
     generic_nested_structs::generic_nested_structs();
+    generic_nested_structs_two::run();
 }
