@@ -12,25 +12,23 @@ impl MainEntity {
             }
         }
     }
-    fn get_row_by_name<T>(&self, name: String) -> Option<Data<T>> {
-        for row in &self.rows {
+    fn get_row_by_name(&self, name: &str) -> Option<DataType> {
+        for row in self.rows.iter() {
+            let row_clone = row.clone();
             match row {
                 DataType::U8(row_data) => {
                     if row_data.name == name {
-                        let data = *row_data.to_owned();
-                        return Option::Some(data);
+                        return Option::Some(row_clone);
                     }
                 },
-                DataType::F32(data) => {
-                    if data.name == name {
-                        let data = *data.to_owned();
-                        return Option::Some(data);
+                DataType::F32(row_data) => {
+                    if row_data.name == name {
+                        return Option::Some(row_clone);
                     }
                 },
-                DataType::Extra(data) => {
-                    if data.name == name {
-                        let data = *data.to_owned();
-                        return Option::Some(data);
+                DataType::Extra(row_data) => {
+                    if row_data.name == name {
+                        return Option::Some(row_clone);
                     }
                 },
             }
@@ -39,17 +37,20 @@ impl MainEntity {
     }
 }
 
+#[derive(Clone)]
 enum DataType {
     U8(Data<u8>),
     F32(Data<f32>),
     Extra(ExtraStruct),
 }
 
+#[derive(Clone)]
 struct Data<T> {
     name: String,
     values: Vec<T>,
 }
 
+#[derive(Clone)]
 struct ExtraStruct {
     name: String,
     values: Vec<String>,
@@ -82,4 +83,5 @@ pub fn generic_nested_structs() {
     let row3 = ExtraStruct { name: "c".to_string(), values: vec!["alpha".to_string(), "beta".to_string() ]};
     let mainentity = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
     mainentity.print_values();
+    let row1_clone = mainentity.get_row_by_name("a").unwrap();
 }
