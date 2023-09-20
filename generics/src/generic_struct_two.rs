@@ -19,6 +19,9 @@ pub fn generic_struct_two() {
 
     for chan in exr.channels {
         for _value in chan.values {
+            //
+            // THIS RUNS, BUT CAN NOT GET VALUES OUT OF "dyn PixelValue"
+            //
             // print!("{}", value);
         }
     }
