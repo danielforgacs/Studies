@@ -12,6 +12,31 @@ impl MainEntity {
             }
         }
     }
+    fn get_row_by_name<T>(&self, name: String) -> Option<Data<T>> {
+        for row in &self.rows {
+            match row {
+                DataType::U8(row_data) => {
+                    if row_data.name == name {
+                        let data = *row_data.to_owned();
+                        return Option::Some(data);
+                    }
+                },
+                DataType::F32(data) => {
+                    if data.name == name {
+                        let data = *data.to_owned();
+                        return Option::Some(data);
+                    }
+                },
+                DataType::Extra(data) => {
+                    if data.name == name {
+                        let data = *data.to_owned();
+                        return Option::Some(data);
+                    }
+                },
+            }
+        }
+        Option::None
+    }
 }
 
 enum DataType {
@@ -21,10 +46,12 @@ enum DataType {
 }
 
 struct Data<T> {
+    name: String,
     values: Vec<T>,
 }
 
 struct ExtraStruct {
+    name: String,
     values: Vec<String>,
 }
 
@@ -50,9 +77,9 @@ impl ExtraStruct {
 
 pub fn generic_nested_structs() {
     println!("generic_nested_structs");
-    let row1 = DataType::U8(Data { values: vec![1_u8, 2_u8, 5_u8] });
-    let row2 = DataType::F32(Data { values: vec![1.0_f32, 2.0_f32, 5.0_f32] });
-    let row3 = ExtraStruct { values: vec!["alpha".to_string(), "beta".to_string() ]};
+    let row1 = DataType::U8(Data { name: "a".to_string(), values: vec![1_u8, 2_u8, 5_u8] });
+    let row2 = DataType::F32(Data { name: "b".to_string(), values: vec![1.0_f32, 2.0_f32, 5.0_f32] });
+    let row3 = ExtraStruct { name: "c".to_string(), values: vec!["alpha".to_string(), "beta".to_string() ]};
     let mainentity = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
     mainentity.print_values();
 }
