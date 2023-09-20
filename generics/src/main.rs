@@ -5,6 +5,7 @@ mod impl_vs_dyn;
 mod generic_struct_two;
 mod generic_struct_three;
 mod generic_struct_four;
+mod generic_nested_structs;
 
 fn main() {
     basic::run_basic();
@@ -14,5 +15,6 @@ fn main() {
     impl_vs_dyn::impl_vs_dyn();
     generic_struct_two::generic_struct_two();
     generic_struct_three::generic_struct_three();
-    generic_struct_four::generic_struct_four()
+    generic_struct_four::generic_struct_four();
+    generic_nested_structs::generic_nested_structs();
 }
