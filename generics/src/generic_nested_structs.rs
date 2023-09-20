@@ -68,6 +68,10 @@ where
     }
 }
 
+impl DataType {
+
+}
+
 impl ExtraStruct {
     fn duplicate_and_print_for_strings(&self) {
         for value in &self.values {
@@ -78,10 +82,24 @@ impl ExtraStruct {
 
 pub fn generic_nested_structs() {
     println!("generic_nested_structs");
-    let row1 = DataType::U8(Data { name: "a".to_string(), values: vec![1_u8, 2_u8, 5_u8] });
-    let row2 = DataType::F32(Data { name: "b".to_string(), values: vec![1.0_f32, 2.0_f32, 5.0_f32] });
-    let row3 = ExtraStruct { name: "c".to_string(), values: vec!["alpha".to_string(), "beta".to_string() ]};
-    let mainentity = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
-    mainentity.print_values();
-    let row1_clone = mainentity.get_row_by_name("a").unwrap();
+    {
+        let row1 = DataType::U8(Data { name: "a".to_string(), values: vec![1_u8, 2_u8, 5_u8] });
+        let row2 = DataType::F32(Data { name: "b".to_string(), values: vec![1.0_f32, 2.0_f32, 5.0_f32] });
+        let row3 = ExtraStruct { name: "c".to_string(), values: vec!["alpha".to_string(), "beta".to_string() ]};
+        let mainentity = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
+        mainentity.print_values();
+        let row1_clone = mainentity.get_row_by_name("a").unwrap();
+    }
+    {
+        let row_1 = Data { name: "a".to_string(), values: vec![1_u8, 2_u8, 5_u8] };
+        let row_2 = Data { name: "b".to_string(), values: vec![1.0_f32, 2.0_f32, 5.0_f32] };
+        let row_3 = ExtraStruct { name: "c".to_string(), values: vec!["alpha".to_string(), "beta".to_string() ]};
+        let mainentity = MainEntity { rows: vec![
+            DataType::U8(row_1),
+            DataType::F32(row_2),
+            DataType::Extra(row_3)],
+        };
+        mainentity.print_values();
+        let row1_clone = mainentity.get_row_by_name("a").unwrap();
+    }
 }
