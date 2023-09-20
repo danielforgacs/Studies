@@ -17,12 +17,17 @@ pub fn generic_struct_four() {
     let group = MainEntity { rows: vec![row1, row2] };
     for row_values in group.rows {
         match row_values {
-            DataType::U8(values) => (),
-            DataType::F32(values) => (),
+            DataType::U8(values) => do_stuff_with_values::<u8>(values),
+            DataType::F32(values) => do_stuff_with_values::<f32>(values),
         }
     }
 }
 
-fn do_stuff_with_values<T>(values: Vec<T>) {
-
+fn do_stuff_with_values<T>(values: Data<T>)
+where
+    T: std::fmt::Debug
+{
+    for k in values.values {
+        println!("{:?}", k);
+    }
 }
