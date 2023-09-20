@@ -20,7 +20,8 @@ fn trait_as_impl_arg(k: impl Rnd + std::fmt::Display) {
     println!("trait_as_impl_arg: {}", k);
 }
 
-/// "dyn" alwalys has to be &
+/// "dyn" alwalys has to be & because we don't know
+/// the trait size at compile time
 fn trait_as_dyn_arg(k: &dyn AutoTraitForDyn) {
     println!("trait_as_dyn_arg: {}", k);
 }
