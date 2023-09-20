@@ -11,11 +11,15 @@ struct Data<T> {
     values: Vec<T>,
 }
 
-impl<T: std::fmt::Display + std::fmt::Debug> Data<T> {
+impl<T> Data<T>
+where
+    T: std::fmt::Display + std::fmt::Debug
+{
     fn duplicate_and_print(&self) {
         for value in &self.values {
             print!("{} <{:?}>, ", value, value);
         }
+        println!();
     }
 }
 
