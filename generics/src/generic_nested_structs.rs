@@ -2,6 +2,18 @@ struct MainEntity {
     rows: Vec<DataType>,
 }
 
+impl MainEntity {
+    fn print_values(&self) {
+        for row in &self.rows {
+            match row  {
+                DataType::U8(data) => data.duplicate_and_print(),
+                DataType::F32(data) => data.duplicate_and_print(),
+                DataType::Extra(data) => data.duplicate_and_print_for_strings(),
+            }
+        }
+    }
+}
+
 enum DataType {
     U8(Data<u8>),
     F32(Data<f32>),
@@ -41,12 +53,6 @@ pub fn generic_nested_structs() {
     let row1 = DataType::U8(Data { values: vec![1_u8, 2_u8, 5_u8] });
     let row2 = DataType::F32(Data { values: vec![1.0_f32, 2.0_f32, 5.0_f32] });
     let row3 = ExtraStruct { values: vec!["alpha".to_string(), "beta".to_string() ]};
-    let group = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
-    for row_values in group.rows {
-        match row_values {
-            DataType::U8(values) => values.duplicate_and_print(),
-            DataType::F32(values) => values.duplicate_and_print(),
-            DataType::Extra(values) => values.duplicate_and_print_for_strings(),
-        }
-    }
+    let mainentity = MainEntity { rows: vec![row1, row2, DataType::Extra(row3)] };
+    mainentity.print_values();
 }
