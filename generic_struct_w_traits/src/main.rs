@@ -6,7 +6,6 @@ struct Exr<'a> {
     channels: Vec<&'a dyn Pixel>,
 }
 
-#[derive(Debug, Clone)]
 struct Channel<T> {
     name: String,
     pixels: Vec<T>,
