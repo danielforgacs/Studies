@@ -11,7 +11,10 @@ struct Channel<T> {
     pixels: Vec<T>,
 }
 
-impl<T: std::fmt::Display + std::fmt::Debug> Pixel for Channel<T> {
+impl<T> Pixel for Channel<T>
+where
+    T: std::fmt::Display + std::fmt::Debug
+{
     fn to_chan(&self) {
         for p in &self.pixels {
             println!("{}, {:?}", p, p);
