@@ -6,12 +6,17 @@ class Descriptor:
     def __get__(self, obj, objtype):
         return obj.__dict__['attr']
 
-class Klass:
+class A:
+    attr = Descriptor()
+
+class B:
     attr = Descriptor()
 
 if __name__ == '__main__':
-    aaa = Klass()
-    bbb = Klass()
+    aaa = A()
+    bbb = A()
+    ccc = B()
+    ddd = B()
     try:
         aaa.attr = 'n/a'
     except:
@@ -21,5 +26,9 @@ if __name__ == '__main__':
 
     aaa.attr = 5
     bbb.attr = 9876
+    ccc.attr = 1111
+    ddd.attr = 2222
     assert aaa.attr == 5, '!!! GOT THE WRONG VALUE BACK.'
     assert bbb.attr == 9876, '!!! GOT THE WRONG VALUE BACK.'
+    assert ccc.attr == 1111, '!!! GOT THE WRONG VALUE BACK.'
+    assert ddd.attr == 2222, '!!! GOT THE WRONG VALUE BACK.'
