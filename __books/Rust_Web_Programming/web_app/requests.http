@@ -1,0 +1,35 @@
+GET http://localhost:8080
+
+###
+
+GET http://localhost:8080/v1/auth/login
+
+###
+
+GET http://localhost:8080/v1/item/get
+
+###
+
+POST http://localhost:8080/v1/item/create/1st_item
+
+###
+
+POST http://localhost:8080/v1/item/edit
+content-type: application/json
+token: This some good old Json Web Token!
+
+{
+    "title": "1st_item",
+    "status": "DONE"
+}
+
+###
+
+POST http://localhost:8080/v1/item/delete
+content-type: application/json
+token: This some good old Json Web Token!
+
+{
+    "title": "1st_item",
+    "status": "DONE"
+}
