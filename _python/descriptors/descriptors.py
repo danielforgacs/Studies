@@ -10,12 +10,16 @@ class Klass:
     attr = Descriptor()
 
 if __name__ == '__main__':
-    instance = Klass()
+    aaa = Klass()
+    bbb = Klass()
     try:
-        instance.attr = 'n/a'
+        aaa.attr = 'n/a'
     except:
         pass
     else:
         raise Exception('!!! this should have errored !!!')
-    instance.attr = 5
-    assert instance.attr == 5, '!!! COULD NOT GET BACK THE ASSIGNED VALUE.'
+
+    aaa.attr = 5
+    bbb.attr = 9876
+    assert aaa.attr == 5, '!!! GOT THE WRONG VALUE BACK.'
+    assert bbb.attr == 9876, '!!! GOT THE WRONG VALUE BACK.'
