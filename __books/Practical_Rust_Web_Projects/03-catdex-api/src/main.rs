@@ -14,6 +14,8 @@ use diesel::r2d2::{ConnectionManager, Pool};
 use dotenv::dotenv;
 use std::env;
 
+const URL: &str = "127.0.0.1:8090";
+
 #[derive(Queryable, Serialize, Debug)]
 struct Cats {
     pub id: i32,
@@ -32,8 +34,8 @@ async fn api_cats(pool: web::Data<Pool<ConnectionManager<PgConnection>>>) -> Htt
     })
     .await
     // Clean this up!
-    .unwrap()
-    .unwrap();
+    .expect("Asszem az await hasalt et.")
+    .expect("A db cat load nem ment.");
     HttpResponse::Ok().json(query)
 }
 
@@ -52,14 +54,18 @@ pub fn establish_connection() -> PgConnection {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    println!("Setting up...");
     dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set");
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let manager = ConnectionManager::<PgConnection>::new(&database_url);
-    let pool = r2d2::Pool::builder()
-        .build(manager)
-        .expect("Failed to create DB connection pool.");
+    let pool = match r2d2::Pool::builder().build(manager) {
+        Ok(pool) => pool,
+        Err(_) => {
+            println!("Failed to create db connection pool.");
+            return Ok(());
+        }
+    };
+    println!("serving: http://{}", URL);
     HttpServer::new(
         move || {
             App::new()
@@ -75,7 +81,7 @@ async fn main() -> std::io::Result<()> {
                 .route("/", web::get().to(index))
         }
     )
-        .bind("127.0.0.1:8090")?
+        .bind(URL)?
         .run()
         .await
 }
