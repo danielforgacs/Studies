@@ -3,7 +3,7 @@ class Descriptor:
         if not isinstance(value, int):
             raise Exception('!!! THIS SHOULD HAVE BEEN AN int TYPE.')
         obj.__dict__['attr'] = value
-    def __get__(self, obj, objtype=None):
+    def __get__(self, obj, objtype):
         return obj.__dict__['attr']
 
 class Klass:
