@@ -1,6 +1,3 @@
-class Meta(type):
-    pass
-
 class Descriptor:
     def __set_name__(self, owner, name):
         self.private_name = '_' + name
@@ -11,7 +8,7 @@ class Descriptor:
     def __get__(self, obj, objtype):
         return obj.__dict__[self.private_name]
 
-class A(metaclass=Meta):
+class A:
     attr = Descriptor()
     stuff = Descriptor()
 
