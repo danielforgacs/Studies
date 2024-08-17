@@ -5,3 +5,7 @@
 (2) - start docker postgres image
 
     $ docker run -e POSTGRES_PASSWORD=1111 --network pgnet -p 5432:5432 postgres
+
+(3) - run psql in docker postgres
+
+    $ docker exec -ti <CONTAINER ID>  psql -U postgres
