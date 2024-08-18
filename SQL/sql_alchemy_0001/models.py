@@ -1,4 +1,4 @@
-from sqlalchemy.schema import MetaData
+import connection
 from sqlalchemy.orm import DeclarativeBase
 
 
@@ -7,4 +7,8 @@ class Base(DeclarativeBase):
 
 
 def migrate():
-    MetaData.create_all()
+    Base.metadata.create_all(connection.engine)
+
+
+if __name__ == '__main__':
+    migrate()
