@@ -3,9 +3,9 @@ from sqlalchemy import create_engine
 
 engine = create_engine((
     "postgresql+psycopg://"
-    "scott:"
-    "tiger@"
+    "postgres:"
+    "pass@"
     "localhost:"
     "5432/"
-    "mydatabase"
-    ))
+    "rnddb"
+))
