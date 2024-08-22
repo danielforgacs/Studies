@@ -7,6 +7,7 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
+from sqlalchemy import select
 
 
 engine = create_engine('sqlite:///data.db')
@@ -38,4 +39,12 @@ class Address(Base):
         return f"Address(id={self.id!r}, email_address={self.email_address!r})"
 
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
+
+print('\n')
+stmt = select(User).limit(10)
+print(stmt)
+
+print('\n')
+stmt = select(Address).join(User).where(User.name.__eq__('pisti'))
+print(stmt)
