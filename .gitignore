@@ -8,3 +8,5 @@ __books/Rust_Web_Programming/web_app/state.json
 
 # all Rust target dirs
 target/
+
+SQL/sql_alchemy_sqlite_file_based/data.db
