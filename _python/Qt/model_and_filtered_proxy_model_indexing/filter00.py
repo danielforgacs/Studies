@@ -16,7 +16,9 @@ data = (
 class Model(QtGui.QStandardItemModel):
     def reload(self):
         for idx, item in enumerate(data):
-            self.appendRow(QtGui.QStandardItem(f'{idx} - {item}'))
+            item = QtGui.QStandardItem(f'{idx} - {item}')
+            item.setData(idx)
+            self.appendRow(item)
 
 
 class ProxyModel(QtCore.QSortFilterProxyModel):
