@@ -2,16 +2,21 @@ from PyQt6 import QtWidgets
 from PyQt6 import QtGui
 from PyQt6 import QtCore
 
+data = (
+    'a',
+    'b',
+    'ab',
+    'bc',
+    'abc',
+    'bcde',
+    'abcde',
+)
+
 
 class Model(QtGui.QStandardItemModel):
     def reload(self):
-        self.appendRow(QtGui.QStandardItem('a'))
-        self.appendRow(QtGui.QStandardItem('ab'))
-        self.appendRow(QtGui.QStandardItem('abc'))
-        self.appendRow(QtGui.QStandardItem('bcd'))
-        self.appendRow(QtGui.QStandardItem('cde'))
-        self.appendRow(QtGui.QStandardItem('de'))
-        self.appendRow(QtGui.QStandardItem('e'))
+        for idx, item in enumerate(data):
+            self.appendRow(QtGui.QStandardItem(f'{idx} - {item}'))
 
 
 class ProxyModel(QtCore.QSortFilterProxyModel):
@@ -28,11 +33,13 @@ class Widget(QtWidgets.QTreeView):
         self.setModel(proxy_model)
         self.selectionModel().selectionChanged.connect(self.on_selection_changed)
         model.reload()
-        proxy_model.set_filter('b')
+        proxy_model.set_filter('a')
 
 
     def on_selection_changed(self, selected, deselected):
         print(selected, deselected)
+        print([idx.row() for idx in selected.indexes()])
+        print([idx.row() for idx in self.selectedIndexes()])
 
 
 if __name__ == '__main__':
