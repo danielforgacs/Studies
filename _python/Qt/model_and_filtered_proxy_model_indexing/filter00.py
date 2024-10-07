@@ -13,11 +13,16 @@ data = (
 )
 
 
+class Dummy:
+    def __init__(self, num):
+        self.num = num * 10
+
+
 class Model(QtGui.QStandardItemModel):
     def reload(self):
         for idx, item in enumerate(data):
             item = QtGui.QStandardItem(f'{idx} - {item}')
-            item.setData(idx, 3)
+            item.setData(Dummy(idx), 3)
             self.appendRow(item)
 
 
@@ -40,7 +45,7 @@ class Widget(QtWidgets.QTreeView):
 
     def on_selection_changed(self, selected, deselected):
         item = selected.indexes()[0]
-        print(item.data(3))
+        print(item.data(3).num)
         print(selected, deselected)
         print([idx.row() for idx in selected.indexes()])
         print([idx.row() for idx in self.selectedIndexes()])
