@@ -21,9 +21,10 @@ class Dummy:
 class Model(QtGui.QStandardItemModel):
     def reload(self):
         for idx, item in enumerate(data):
-            item = QtGui.QStandardItem(f'{idx} - {item}')
+            item = QtGui.QStandardItem(f'{item} - {idx}')
             item.setData(Dummy(idx), 3)
-            self.appendRow(item)
+            item2 = QtGui.QStandardItem(str(idx))
+            self.appendRow((item, item2))
 
 
 class ProxyModel(QtCore.QSortFilterProxyModel):
@@ -41,14 +42,19 @@ class Widget(QtWidgets.QTreeView):
         self.selectionModel().selectionChanged.connect(self.on_selection_changed)
         model.reload()
         proxy_model.set_filter('a')
+        self.setSortingEnabled(True)
 
 
     def on_selection_changed(self, selected, deselected):
+        print('-----------------')
         item = selected.indexes()[0]
         print(item.data(3).num)
         print(selected, deselected)
         print([idx.row() for idx in selected.indexes()])
         print([idx.row() for idx in self.selectedIndexes()])
+        print(self.model())
+        # print(self.model().mapSelectionToSource)
+        print(self.model().mapToSource(self.selectedIndexes()[0]))
 
 
 if __name__ == '__main__':
