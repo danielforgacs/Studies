@@ -3,14 +3,21 @@ from PyQt6 import QtGui
 from PyQt6 import QtCore
 
 
+class Model(QtGui.QStandardItemModel):
+    pass
+
+
+class ProxyModel(QtCore.QSortFilterProxyModel):
+    pass
+
+
 class Widget(QtWidgets.QTreeView):
     def __init__(self):
         super().__init__()
-        model = QtGui.QStandardItemModel()
-        proxy_model = QtCore.QSortFilterProxyModel()
+        model = Model()
+        proxy_model = ProxyModel()
         proxy_model.setSourceModel(model)
         self.setModel(proxy_model)
-
 
 
 if __name__ == '__main__':
