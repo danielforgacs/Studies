@@ -6,12 +6,17 @@ from PyQt6 import QtCore
 class Model(QtGui.QStandardItemModel):
     def reload(self):
         self.appendRow(QtGui.QStandardItem('a'))
-        self.appendRow(QtGui.QStandardItem('b'))
-        self.appendRow(QtGui.QStandardItem('c'))
+        self.appendRow(QtGui.QStandardItem('ab'))
+        self.appendRow(QtGui.QStandardItem('abc'))
+        self.appendRow(QtGui.QStandardItem('bcd'))
+        self.appendRow(QtGui.QStandardItem('cde'))
+        self.appendRow(QtGui.QStandardItem('de'))
+        self.appendRow(QtGui.QStandardItem('e'))
 
 
 class ProxyModel(QtCore.QSortFilterProxyModel):
-    pass
+    def set_filter(self, text):
+        self.setFilterFixedString(text)
 
 
 class Widget(QtWidgets.QTreeView):
@@ -23,6 +28,7 @@ class Widget(QtWidgets.QTreeView):
         self.setModel(proxy_model)
         self.selectionModel().selectionChanged.connect(self.on_selection_changed)
         model.reload()
+        proxy_model.set_filter('b')
 
 
     def on_selection_changed(self, selected, deselected):
