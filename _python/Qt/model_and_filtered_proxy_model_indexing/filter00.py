@@ -54,7 +54,10 @@ class Widget(QtWidgets.QTreeView):
         print([idx.row() for idx in self.selectedIndexes()])
         print(self.model())
         # print(self.model().mapSelectionToSource)
-        print(self.model().mapToSource(self.selectedIndexes()[0]))
+        source_model_index = self.model().mapToSource(self.selectedIndexes()[0])
+        print(source_model_index)
+        data = self.model().sourceModel().itemFromIndex(source_model_index)
+        print(data)
 
 
 if __name__ == '__main__':
