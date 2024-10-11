@@ -12,6 +12,10 @@ def name_check(input):
     (True, 'aaa'),
     (True, 'aaa_a'),
 
+    (True, 'aa_aa_aa_aa'),
+
+    (False, 'aa____aa__aa_aa'),
+
     (False, '_'),
     (False, '_a'),
     (False, '_a_'),
