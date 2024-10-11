@@ -1,7 +1,7 @@
 import pytest
 import re
 
-PATTERN = r'((a+)+)(_(a+))*'
+PATTERN = r'(a+)(_(a+))*'
 
 def name_check(input):
     return bool(re.fullmatch(PATTERN, input))
