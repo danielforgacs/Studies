@@ -1,7 +1,6 @@
 import pytest
 import re
 
-PATTERN = r'((a+)+)(_((a+)*))*'
 PATTERN = r'((a+)+)(_(a+))*'
 
 def name_check(input):
@@ -15,6 +14,8 @@ def name_check(input):
 
     (False, '_'),
     (False, '_a'),
+    (False, '_a_'),
+    (False, 'a_'),
 ))
 def test_name_regex(expected, input):
     assert name_check(input) is expected
