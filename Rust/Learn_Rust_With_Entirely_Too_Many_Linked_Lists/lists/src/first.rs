@@ -1,6 +1,10 @@
-pub enum List {
+enum Link {
     Empty,
     More(Box<Node>),
+}
+
+struct List {
+    head: Link,
 }
 
 struct Node {
