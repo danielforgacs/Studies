@@ -30,3 +30,9 @@ except AttributeError:
     pass
 
 print(i._K__attr_3)
+i._K__attr_3 = 'lasjkdhlkjfh'
+try:
+    i.__attr_3 = 'LLLLLLLLLLLLLLl'
+except AttributeError:
+    pass
+print(i._K__attr_3)
