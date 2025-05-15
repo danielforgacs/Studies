@@ -1,38 +1,35 @@
-class K:
+class _BaseClass:
+    __instance_counter = 0
+
     def __init__(self):
-        self.attr = 'plain attr'
-        self._attr_2 = 'private attr'
-        self.__attr_3 = 'name mangled attr'
-
-    # @property
-    # def _attr_2(self):
-    #     return self._attr_2
-
-    # @_attr_2.setter
-    # def _attr_2(self, value):
-    #     pass
-    #     # self._attr_2 = value
+        self.__class__.__instance_counter += 1
+        self.__counter = self.__class__.__instance_counter
 
 
-    @property
-    def _attr_3(self):
-        return self.__attr_3
+    def get_counter(self):
+        return self.__counter
 
 
-i = K()
-print(dir(i))
-print(i.attr)
-print(i._attr_2)
-print(i._attr_3)
-try:
-    print(i.__attr_3)
-except AttributeError:
-    pass
+class Klass(_BaseClass):
+    def get_id(self):
+        # return self.__counter
+        sup = super()
+        return sup.get_counter()
 
-print(i._K__attr_3)
-i._K__attr_3 = 'lasjkdhlkjfh'
-try:
-    i.__attr_3 = 'LLLLLLLLLLLLLLl'
-except AttributeError:
-    pass
-print(i._K__attr_3)
+
+def main():
+    stuff_1 = Klass()
+    print(stuff_1.get_id())
+    stuff_2 = Klass()
+    print(stuff_2.get_id())
+    stuff_3 = Klass()
+    print(stuff_3.get_id())
+    stuff_4 = Klass()
+    stuff_5 = Klass()
+    stuff_6 = Klass()
+    print(stuff_6.get_id())
+    print(stuff_1.get_id())
+
+
+if __name__ == '__main__':
+    main()
