@@ -26,17 +26,15 @@ class Main(QtWidgets.QWidget):
 
         self.stuffs_view = StuffsView()
         self.delete_button = QtWidgets.QPushButton("Delete")
-        self.delete_button.clicked.connect(self.delete)
+        self.delete_button.clicked.connect(self.stuffs_view.delete_selected)
 
         self.layout().addWidget(self.stuffs_view)
         self.layout().addWidget(self.delete_button)
 
         self.data = Data()
+
         for stuff in self.data.stuffs:
             self.stuffs_view.append_stuff(stuff)
-
-    def delete(self):
-        print("ljh")
 
 
 class StuffsView(QtWidgets.QListView):
@@ -50,13 +48,13 @@ class StuffsView(QtWidgets.QListView):
         item.setData(QtCore.Qt.ItemDataRole.UserRole)
         self.model().appendRow(item)
 
-    def selectionChanged(self, selected, deselected):
-        print(
-            "...................................\n"
-            f"selected: {selected}\n"
-            f"deselected: {deselected}"
-        )
-        return super().selectionChanged(selected, deselected)
+    def delete_selected(self):
+        self.get_selected_items()
+
+    def get_selected_items(self):
+        print('..................................')
+        for index in self.selectedIndexes():
+            print(index)
 
 
 if __name__ == '__main__':
