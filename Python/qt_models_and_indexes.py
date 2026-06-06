@@ -15,7 +15,15 @@ class Stuff:
 class Data:
     def __init__(self):
         self.stuffs = []
-        for name in list('ABCDE'):
+        for name in list(
+            "D"
+            "G"
+            "B"
+            "C"
+            "A"
+            "E"
+            "F"
+        ):
             self.stuffs.append(Stuff(name))
 
 
@@ -44,6 +52,7 @@ class StuffsView(QtWidgets.QListView):
         proxy = QtCore.QSortFilterProxyModel()
         proxy.setSourceModel(QtGui.QStandardItemModel())
         self.setModel(proxy)
+        self.model().sort(0)
 
     def append_stuff(self, stuff: Stuff):
         item = QtGui.QStandardItem(stuff.display())
@@ -51,9 +60,13 @@ class StuffsView(QtWidgets.QListView):
         self.model().sourceModel().appendRow(item)
 
     def delete_selected(self):
+        proxy = self.model()
+        model = proxy.sourceModel()
         print('..................................')
         for index in self.selectedIndexes():
-            print(index)
+            proxy_index = index.row()
+            model_index = proxy.mapToSource(index).row()
+            print(f"proxy: {proxy_index}, model: {model_index}")
 
 
 if __name__ == '__main__':
