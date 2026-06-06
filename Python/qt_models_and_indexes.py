@@ -12,17 +12,34 @@ class Stuff:
         return f"stuff: {self.name}"
 
 
-class Main(QtWidgets.QListView):
+class Data:
+    def __init__(self):
+        self.stuffs = []
+        for name in list('ABCDE'):
+            self.stuffs.append(Stuff(name))
+
+
+class Main(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setLayout(QtWidgets.QVBoxLayout())
+
+        self.stuffs_view = StuffsView()
+        self.delete_button = QtWidgets.QPushButton("Delete")
+        self.delete_button.clicked.connect(self.delete)
+
+        self.layout().addWidget(self.stuffs_view)
+        self.layout().addWidget(self.delete_button)
+
+    def delete(self):
+        print()
+
+
+class StuffsView(QtWidgets.QListView):
     def __init__(self):
         super().__init__()
         self.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
         self.setModel(QtGui.QStandardItemModel())
-
-        for name in list('ABCDE'):
-            instance = Stuff(name)
-            item = QtGui.QStandardItem(instance.display())
-            item.setData(instance, QtCore.Qt.ItemDataRole.UserRole)
-            self.model().appendRow(item)
 
     def selectionChanged(self, selected, deselected):
         print(
@@ -35,7 +52,6 @@ class Main(QtWidgets.QListView):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
-    # app = QtGui.QGuiApplication([])
     main = Main()
     main.show()
     sys.exit(app.exec())
