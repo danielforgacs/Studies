@@ -31,8 +31,12 @@ class Main(QtWidgets.QWidget):
         self.layout().addWidget(self.stuffs_view)
         self.layout().addWidget(self.delete_button)
 
+        self.data = Data()
+        for stuff in self.data.stuffs:
+            self.stuffs_view.append_stuff(stuff)
+
     def delete(self):
-        print()
+        print("ljh")
 
 
 class StuffsView(QtWidgets.QListView):
@@ -40,6 +44,11 @@ class StuffsView(QtWidgets.QListView):
         super().__init__()
         self.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
         self.setModel(QtGui.QStandardItemModel())
+
+    def append_stuff(self, stuff: Stuff):
+        item = QtGui.QStandardItem(stuff.display())
+        item.setData(QtCore.Qt.ItemDataRole.UserRole)
+        self.model().appendRow(item)
 
     def selectionChanged(self, selected, deselected):
         print(
