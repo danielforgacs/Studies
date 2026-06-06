@@ -51,9 +51,6 @@ class StuffsView(QtWidgets.QListView):
         self.model().sourceModel().appendRow(item)
 
     def delete_selected(self):
-        self.get_selected_items()
-
-    def get_selected_items(self):
         print('..................................')
         for index in self.selectedIndexes():
             print(index)
