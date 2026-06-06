@@ -16,13 +16,16 @@ class Data:
     def __init__(self):
         self.stuffs = []
         for name in list(
-            "D"
-            "G"
-            "B"
-            "C"
-            "A"
-            "E"
-            "F"
+            "E" # 4
+            "F" # 5
+            "B" # 1
+            "A" # 0
+            "D" # 3
+            "G" # 6
+            "C" # 2
+            "H" # 7
+            "I" # 8
+            "J" # 9
         ):
             self.stuffs.append(Stuff(name))
 
@@ -63,10 +66,17 @@ class StuffsView(QtWidgets.QListView):
         proxy = self.model()
         model = proxy.sourceModel()
         print('..................................')
-        for index in self.selectedIndexes():
-            proxy_index = index.row()
-            model_index = proxy.mapToSource(index).row()
-            print(f"proxy: {proxy_index}, model: {model_index}")
+        rows_to_delete = []
+        for proxy_index in self.selectedIndexes():
+            model_index = proxy.mapToSource(proxy_index)
+            rows_to_delete.append(model_index.row())
+            proxy_row = proxy_index.row()
+            model_row = model_index.row()
+            proxy_text = proxy_index.data(QtCore.Qt.ItemDataRole.DisplayRole)
+            model_text = model_index.data(QtCore.Qt.ItemDataRole.DisplayRole)
+            print(f"proxy: {proxy_row}, model: {model_row}, proxy text: {proxy_text}, model text: {model_text}")
+        rows_to_delete = sorted(set(rows_to_delete), reverse=True)
+        print(rows_to_delete)
 
 
 if __name__ == '__main__':
