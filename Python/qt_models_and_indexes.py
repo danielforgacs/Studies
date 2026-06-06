@@ -15,19 +15,19 @@ class Stuff:
 class Data:
     def __init__(self):
         self.stuffs = []
-        for name in list(
-            "E" # 4
-            "F" # 5
-            "B" # 1
-            "A" # 0
-            "D" # 3
-            "G" # 6
-            "C" # 2
-            "H" # 7
-            "I" # 8
-            "J" # 9
-        ):
-            self.stuffs.append(Stuff(name))
+        for idx, name in enumerate(list(
+            "E"
+            "F"
+            "B"
+            "A"
+            "D"
+            "G"
+            "C"
+            "J"
+            "H"
+            "I"
+        )):
+            self.stuffs.append(Stuff(f"{name} - {idx}"))
 
 
 class Main(QtWidgets.QWidget):
@@ -77,6 +77,8 @@ class StuffsView(QtWidgets.QListView):
             print(f"proxy: {proxy_row}, model: {model_row}, proxy text: {proxy_text}, model text: {model_text}")
         rows_to_delete = sorted(set(rows_to_delete), reverse=True)
         print(rows_to_delete)
+        for row in rows_to_delete:
+            model.removeRow(row)
 
 
 if __name__ == '__main__':
