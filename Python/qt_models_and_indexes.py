@@ -41,12 +41,14 @@ class StuffsView(QtWidgets.QListView):
     def __init__(self):
         super().__init__()
         self.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
-        self.setModel(QtGui.QStandardItemModel())
+        proxy = QtCore.QSortFilterProxyModel()
+        proxy.setSourceModel(QtGui.QStandardItemModel())
+        self.setModel(proxy)
 
     def append_stuff(self, stuff: Stuff):
         item = QtGui.QStandardItem(stuff.display())
         item.setData(QtCore.Qt.ItemDataRole.UserRole)
-        self.model().appendRow(item)
+        self.model().sourceModel().appendRow(item)
 
     def delete_selected(self):
         self.get_selected_items()
